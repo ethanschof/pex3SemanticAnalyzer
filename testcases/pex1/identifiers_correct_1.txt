@@ -1,0 +1,11 @@
+﻿if
+else
+while
+main
+func
+def
+justLetters
+varNum1
+varNum_2
+this_has_lots_of_underscores
+var1_to_var2

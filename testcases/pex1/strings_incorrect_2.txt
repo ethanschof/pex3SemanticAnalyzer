@@ -1,0 +1,1 @@
+﻿"Most special characters are allowed but not all_"

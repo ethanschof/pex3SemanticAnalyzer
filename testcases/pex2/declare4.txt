@@ -1,0 +1,3 @@
+﻿main(){
+float ugly_num;
+}

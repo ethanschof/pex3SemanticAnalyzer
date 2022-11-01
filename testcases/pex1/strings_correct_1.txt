@@ -1,0 +1,5 @@
+﻿"smallstring"
+"spaces are allowed"
+""
+"CAPITALS and lowercase are ok"
+"Use escape characters and punctuation \" ! . , / "

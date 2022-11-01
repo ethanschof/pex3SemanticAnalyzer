@@ -1,0 +1,3 @@
+﻿def string EMAIL = "john@gmail.com";
+
+main(){}

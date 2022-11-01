@@ -1,0 +1,20 @@
+PEX 2 TEST CASES (C1C Ethan Schofield) 
+Testing String Assign Statements 
+
+- AProgram
+     `- ASingleStatements
+        `- AMainCallStatement
+           `- AMainStatement
+              |- main
+              |- (
+              |- )
+              |- {
+              |- ASingleStatements
+              |  `- AAssignmentStatement
+              |     `- AStringAssignAssignStatement
+              |        |- grass
+              |        |- =
+              |        |- "greener on the other side"
+              |        `- ;
+              `- }
+

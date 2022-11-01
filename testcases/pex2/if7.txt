@@ -1,0 +1,7 @@
+﻿main(){
+if (imbored != 1) {
+imbored = 1;
+} else {
+imhungry = 1;
+}
+}

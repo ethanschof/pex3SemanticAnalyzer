@@ -1,0 +1,4 @@
+﻿func int myfunc3(float x, int y){
+int x;
+x = 5;
+}

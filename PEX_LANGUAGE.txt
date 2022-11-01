@@ -1,0 +1,125 @@
+// This tells SableCC to put all of the code in a package called CS426
+Package CS426;
+
+// Helpers are sets that let you talk about multiple characters in the same way
+Helpers
+	whitespaces = ' ' | 9 | 10 | 13;
+	natural = ['1' .. '9'];
+	whole = ['0' + natural];
+	letter = [['a' .. 'z'] + ['A' .. 'Z']];
+	underscore = '_';
+	decimal_format = natural+ '.' whole+ | '0.' whole+;
+	special_chars_no_quote = [35 .. 38] | '!' | 39 | ',' | '.' | '/' | 58 | 59 | '?' | '@' | '^' | 124 | 126;
+
+// PEX 1 - Lexer Portion
+Tokens
+	// Operations
+	assign = '=';
+	plus = '+';
+	minus = '-';
+	mult = '*';
+	divide = '/';
+	eol = ';';
+	bit_and = 'AND';
+	bit_or = 'OR';
+	bit_not = 'NOT';
+	equivalence = '==';
+	not_equivalent = '!=';
+	greater_than = '>';
+	less_than = '<';
+	great_eq_than = '>=';
+	less_eq_than = '<=';
+	
+
+	open_parenthesis = '(';
+	close_parenthesis = ')';
+	open_bracket = '{';
+	close_bracket = '}';
+	comma = ',';
+
+
+	// Identifiers
+	// Reserved words
+	if = 'if';
+	else = 'else';
+	while = 'while';
+	define = 'def';
+	func = 'func';
+	main_def = 'main';
+
+	// can have letters, numbers, underscore
+	id = letter+ (whole* letter*)* underscore? (whole* letter*)*;
+
+
+	// Literals
+	integer = '0' | natural whole*;
+	float = decimal_format | decimal_format 'e' '-'? natural+;
+
+	// Strings
+	string = '"' (letter* '\"'* special_chars_no_quote* whole* ' '*)* '"';
+
+	// Comments
+	comment = '//' ([[0..0xfff] - [10 + 13]])*;
+
+	// Whitespace
+	blank = whitespaces+;
+
+Ignored Tokens
+	blank, comment;
+
+
+// PEX 2 - Parser Portion
+Productions
+	program = constants functions main_def open_bracket statements close_bracket;
+
+	constants = {multiple_constants} constant constants | {no_constants};
+
+	constant = {constant_declare} define [type]:id [varname]:id assign expression eol;
+
+	functions = {multiple_functions} function functions | {no_functions};
+
+	function = {one_function} func id open_parenthesis params close_parenthesis open_bracket statements close_bracket;
+
+	params = {many} param comma params | {one} param;
+
+	param = {one_param} [type]:id [varname]:id |{no_param};
+
+	statements = {multiple} statement statements | {no_statements};
+
+	statement = {assignment} assign_statement |
+		    {declaration} declare_statement |
+		    {func_call} function_call_statement |
+		    {ifstate} if_statement |
+		    {while_loop} while_statement;
+
+	declare_statement = {variable_declare} [type]:id [varname]:id eol;
+
+	assign_statement = {math_assign} id assign expression eol;
+	
+	function_call_statement = {actual_param}id open_parenthesis actual_parameters close_parenthesis eol;
+
+	actual_parameters = {many} actual_param comma actual_parameters | {single} actual_param;
+
+	actual_param = {actual_param}expression | {no_actual_param};
+
+	if_statement = {justif} if open_parenthesis expression close_parenthesis open_bracket statements close_bracket |
+                   {ifelse} if open_parenthesis expression close_parenthesis [if_open_bracket]:open_bracket 
+				[if_statements]:statements [if_close_bracket]:close_bracket else 
+				[else_open_bracket]:open_bracket [else_statements]:statements 
+				[else_close_bracket]:close_bracket;
+
+	while_statement = {while} while open_parenthesis expression close_parenthesis open_bracket statements close_bracket;
+
+	expression = {bitor} expression bit_or expression2 | {pass} expression2;
+	expression2 = {bitand} expression2 bit_and expression3 | {pass} expression3;
+	expression3 = {equivalent} expression3 equivalence expression4 | {notequivalent} expression3 not_equivalent expression4 | {pass} expression4;
+	expression4 = {greateq} expression4 great_eq_than expression_math1 | {lesseq} expression4 less_eq_than expression_math1 | 
+		      {greatthan} expression4 greater_than expression_math1 | {lessthan} expression4 less_than expression_math1 | {pass} expression_math1;
+	
+	// Math expressions
+	expression_math1 = {add} expression_math1 plus expression_math2 | {subtract} expression_math1 minus expression_math2 | {pass} expression_math2;
+	expression_math2 = {multiply} expression_math2 mult expression_math3 | {divide} expression_math2 divide expression_math3 | {pass} expression_math3;
+	expression_math3 = {negative} minus expression_math4 | {bitnot} bit_not expression_math4 | {pass} expression_math4;
+	expression_math4 = {parenthesis} open_parenthesis expression_math1 close_parenthesis | {pass} operand;
+
+	operand = {int} integer | {flo} float | {str} string | {variable} id;

@@ -1,0 +1,6 @@
+﻿main(){
+while(imhungry == 1){
+eat = eat + 1;
+imhungry = 0;
+}
+}
