@@ -44,7 +44,7 @@ namespace CS426.analysis
             decoratedParseTree.Add(node, intDefinition);
         }
 
-        public override void OutAStrOperand(AStringOperand node)
+        public override void OutAStrOperand(AStrOperand node)
         {
             Definition stringDefinition = new StringDefinition();
             stringDefinition.name = "string";
@@ -54,7 +54,7 @@ namespace CS426.analysis
 
         public override void OutAFloOperand(AFloOperand node)
         {
-            Definition floatDefinition = new FLoatDefinition();
+            Definition floatDefinition = new FloatDefinition();
             floatDefinition.name = "float";
 
             decoratedParseTree.Add(node, floatDefinition);
