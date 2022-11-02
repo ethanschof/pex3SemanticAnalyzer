@@ -78,7 +78,7 @@ Productions
 
 	functions = {multiple_functions} function functions | {no_functions};
 
-	function = {one_function} func id open_parenthesis params close_parenthesis open_bracket statements close_bracket;
+	function = func id open_parenthesis params close_parenthesis open_bracket statements close_bracket;
 
 	params = {many} param comma params | {one} param;
 
@@ -92,11 +92,11 @@ Productions
 		    {ifstate} if_statement |
 		    {while_loop} while_statement;
 
-	declare_statement = {variable_declare} [type]:id [varname]:id eol;
+	declare_statement = [type]:id [varname]:id eol;
 
-	assign_statement = {math_assign} id assign expression eol;
+	assign_statement = id assign expression eol;
 	
-	function_call_statement = {actual_param}id open_parenthesis actual_parameters close_parenthesis eol;
+	function_call_statement = id open_parenthesis actual_parameters close_parenthesis eol;
 
 	actual_parameters = {many} actual_param comma actual_parameters | {single} actual_param;
 

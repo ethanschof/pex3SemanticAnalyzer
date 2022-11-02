@@ -29,12 +29,17 @@ namespace CS426.analysis
             Definition stringDefinition = new StringDefinition();
             stringDefinition.name = "string";
 
+            Definition floatDefintion = new FloatDefinition();
+            floatDefintion.name = "float";
+
+            // Register these definitions in the decorated parse tree
             globalSymbolTable.Add("int", intDefinition);
             globalSymbolTable.Add("string", stringDefinition);
+            globalSymbolTable.Add("float", floatDefintion);
         }
 
         // ----------------------------------------------------------------
-        // OPERAND
+        // operand
         // ----------------------------------------------------------------
         public override void OutAIntOperand(AIntOperand node)
         {
@@ -68,14 +73,23 @@ namespace CS426.analysis
             // Make a Object to Store the Definition
             Definition varDefinition;
 
+            // See if the variable is in the local symbol table
             if (!localSymbolTable.TryGetValue(varName, out varDefinition))
             {
-                PrintWarning(node.GetId(), varName + " not found");
+                // If it's not in the local check the global
+                // THIS IF STATEMENT MIGHT HAVE TO BE MOVED INTO THE TOP ONE WITH AN OR RATHER THAN NESTED
+                if (!globalSymbolTable.TryGetValue(varName, out varDefinition))
+                {
+                    // It's not in either table so print an error
+                    PrintWarning(node.GetId(), varName + " not found");
+                }
             }
+            // Check to see if varDefinition is a variable and not a function or constant
             else if (!(varDefinition is VariableDefinition))
             {
                 PrintWarning(node.GetId(), varName + " is not a variable");
             }
+            // Then it's in a table and is a variable so we can decorate the tree with its type
             else
             {
                 VariableDefinition v = (VariableDefinition)varDefinition;
@@ -84,95 +98,169 @@ namespace CS426.analysis
             }
         }
 
-        // EVERYTHING BELOW HERE HAS NOT BEEN CHECKED WITH OUR CODES NAMING CONVENTIONS
-
         // ----------------------------------------------------------------
-        // EXPRESSION 3
+        // expression_math4
         // ----------------------------------------------------------------
-        public override void OutAPassExpression3(APassExpression3 node)
+        public override void OutAPassExpressionMath4(APassExpressionMath4 node)
         {
             Definition operandDefinition;
 
             if (!decoratedParseTree.TryGetValue(node.GetOperand(), out operandDefinition))
             {
-                // If the tree wasn't decorated, the problem/error was printed at a lower level
-            }
+                // If the tree isn't decorated then something happened at the operand node
+            } 
             else
             {
                 decoratedParseTree.Add(node, operandDefinition);
             }
         }
 
-        public override void OutANegativeExpression3(ANegativeExpression3 node)
+        public override void OutAParenthesisExpressionMath4(AParenthesisExpressionMath4 node)
         {
-            Definition operandDefinition;
+            
+        }
 
-            if (!decoratedParseTree.TryGetValue(node.GetOperand(), out operandDefinition))
+        // ----------------------------------------------------------------
+        // expression_math3
+        // ----------------------------------------------------------------
+
+        public override void OutAPassExpressionMath3(APassExpressionMath3 node)
+        {
+            Definition expressionMath4;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath4(), out expressionMath4))
+            {
+                // Problem occured lower on the tree
+            } 
+            else
+            {
+                decoratedParseTree.Add(node, expressionMath4);
+            }
+        }
+
+        public override void OutANegativeExpressionMath3(ANegativeExpressionMath3 node)
+        {
+            Definition expressionMath4;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath4(), out expressionMath4))
             {
                 // Problem occured lower on the tree
             }
-            else if (!(operandDefinition is NumberDefinition))
+            // The thing being negatived is not a float or an integer
+            else if (!(expressionMath4 is IntegerDefinition) && !(expressionMath4 is FloatDefinition))
             {
-                PrintWarning(node.GetSub(), "Only a number can be negated");
+                PrintWarning(node.GetMinus(), "Only floats and integers can be negated");
             }
             else
             {
-                decoratedParseTree.Add(node, operandDefinition);
+                decoratedParseTree.Add(node, expressionMath4);
             }
         }
 
         // ----------------------------------------------------------------
-        // EXPRESSION 2
+        // expression_math2
         // ----------------------------------------------------------------
-        public override void OutAPassExpression2(APassExpression2 node)
+
+        // ----------------------------------------------------------------
+        // expression_math1
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // expression4
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // expression3
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // expression2
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // expression
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // while_statement
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // if_statement
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // actual_param
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // actual_parameters
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // function_call_statement
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // assign_statement
+        // ----------------------------------------------------------------
+
+        public override void OutAAssignStatement(AAssignStatement node)
         {
-            Definition expression3Def;
+            Definition idDef;
+            Definition expressionDef;
 
-            if (!decoratedParseTree.TryGetValue(node.GetExpression3(), out expression3Def))
+            if (!localSymbolTable.TryGetValue(node.GetId().Text, out idDef))
             {
-                // If the tree wasn't decorated, the problem/error was printed at a lower level
+                PrintWarning(node.GetId(), "Identifier " + node.GetId().Text + " does not exist");
+            }
+            else if (!(idDef is VariableDefinition))
+            {
+                PrintWarning(node.GetId(), "Identifier " + node.GetId().Text + " is not a variable");
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpression(), out expressionDef))
+            {
+                // Error was already printed lower in the parse tree if this error occured
+            }
+            else if (((VariableDefinition)idDef).variableType.name != expressionDef.name)
+            {
+                PrintWarning(node.GetId(), "Types don't match");
             }
             else
             {
-                decoratedParseTree.Add(node, expression3Def);
-            }
-        }
-
-        // ----------------------------------------------------------------
-        // EXPRESSION 1
-        // ----------------------------------------------------------------
-        public override void OutAPassExpression(APassExpression node)
-        {
-            Definition expression2Def;
-
-            if (!decoratedParseTree.TryGetValue(node.GetExpression2(), out expression2Def))
-            {
-                // If the tree wasn't decorated, the problem/error was printed at a lower level
-            }
-            else
-            {
-                decoratedParseTree.Add(node, expression2Def);
+                // Nothing is required
             }
         }
 
 
         // ----------------------------------------------------------------
-        // Declaration
+        // declare_statement
         // ----------------------------------------------------------------
         public override void OutADeclareStatement(ADeclareStatement node)
         {
             Definition typeDef;
             Definition idDef;
 
+
             if (!globalSymbolTable.TryGetValue(node.GetType().Text, out typeDef))
             {
                 // Check if the type is a valid type
                 PrintWarning(node.GetType(), "Type " + node.GetType().Text + " does not exist");
             }
+            // Make sure the type is a type and not something else in the symbol table
+            else if (!(typeDef is TypeDefinition))
+            {
+                PrintWarning(node.GetType(), "Type " + node.GetType().Text + " is not a recognized data type");
+            }
             else if (localSymbolTable.TryGetValue(node.GetVarname().Text, out idDef))
             {
                 // Check if variable name is already being used
                 PrintWarning(node.GetVarname(), "ID already declared in local symbol table");
+            }
+            else if (globalSymbolTable.TryGetValue(node.GetVarname().Text, out idDef))
+            {
+                // variable name was already used in global, maybe a function, maybe tried to name something int
+                PrintWarning(node.GetVarname(), "ID already declared in global symbol table");
             }
             else
             {
@@ -180,9 +268,43 @@ namespace CS426.analysis
                 newVariable.name = node.GetVarname().Text;
                 newVariable.variableType = (TypeDefinition)typeDef;
 
-                localSymbolTable.Add(node)
+                localSymbolTable.Add(node.GetVarname().Text, newVariable);
             }
         }
+
+        // ----------------------------------------------------------------
+        // statement
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // statements
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // param
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // params
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // function
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // functions
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // constant
+        // ----------------------------------------------------------------
+
+        // ----------------------------------------------------------------
+        // constants
+        // ----------------------------------------------------------------
+
+
 
     }
 

@@ -961,7 +961,7 @@ public sealed class ANoFunctionsFunctions : PFunctions
     }
 
 }
-public sealed class AOneFunctionFunction : PFunction
+public sealed class AFunction : PFunction
 {
     private TFunc _func_;
     private TId _id_;
@@ -972,11 +972,11 @@ public sealed class AOneFunctionFunction : PFunction
     private PStatements _statements_;
     private TCloseBracket _close_bracket_;
 
-    public AOneFunctionFunction ()
+    public AFunction ()
     {
     }
 
-    public AOneFunctionFunction (
+    public AFunction (
             TFunc _func_,
             TId _id_,
             TOpenParenthesis _open_parenthesis_,
@@ -999,7 +999,7 @@ public sealed class AOneFunctionFunction : PFunction
 
     public override Object Clone()
     {
-        return new AOneFunctionFunction (
+        return new AFunction (
             (TFunc)CloneNode (_func_),
             (TId)CloneNode (_id_),
             (TOpenParenthesis)CloneNode (_open_parenthesis_),
@@ -1013,7 +1013,7 @@ public sealed class AOneFunctionFunction : PFunction
 
     public override void Apply(Switch sw)
     {
-        ((Analysis) sw).CaseAOneFunctionFunction(this);
+        ((Analysis) sw).CaseAFunction(this);
     }
 
     public TFunc GetFunc ()
@@ -2242,17 +2242,17 @@ public sealed class AWhileLoopStatement : PStatement
     }
 
 }
-public sealed class AVariableDeclareDeclareStatement : PDeclareStatement
+public sealed class ADeclareStatement : PDeclareStatement
 {
     private TId _type_;
     private TId _varname_;
     private TEol _eol_;
 
-    public AVariableDeclareDeclareStatement ()
+    public ADeclareStatement ()
     {
     }
 
-    public AVariableDeclareDeclareStatement (
+    public ADeclareStatement (
             TId _type_,
             TId _varname_,
             TEol _eol_
@@ -2265,7 +2265,7 @@ public sealed class AVariableDeclareDeclareStatement : PDeclareStatement
 
     public override Object Clone()
     {
-        return new AVariableDeclareDeclareStatement (
+        return new ADeclareStatement (
             (TId)CloneNode (_type_),
             (TId)CloneNode (_varname_),
             (TEol)CloneNode (_eol_)
@@ -2274,7 +2274,7 @@ public sealed class AVariableDeclareDeclareStatement : PDeclareStatement
 
     public override void Apply(Switch sw)
     {
-        ((Analysis) sw).CaseAVariableDeclareDeclareStatement(this);
+        ((Analysis) sw).CaseADeclareStatement(this);
     }
 
     public TId GetType ()
@@ -2398,18 +2398,18 @@ public sealed class AVariableDeclareDeclareStatement : PDeclareStatement
     }
 
 }
-public sealed class AMathAssignAssignStatement : PAssignStatement
+public sealed class AAssignStatement : PAssignStatement
 {
     private TId _id_;
     private TAssign _assign_;
     private PExpression _expression_;
     private TEol _eol_;
 
-    public AMathAssignAssignStatement ()
+    public AAssignStatement ()
     {
     }
 
-    public AMathAssignAssignStatement (
+    public AAssignStatement (
             TId _id_,
             TAssign _assign_,
             PExpression _expression_,
@@ -2424,7 +2424,7 @@ public sealed class AMathAssignAssignStatement : PAssignStatement
 
     public override Object Clone()
     {
-        return new AMathAssignAssignStatement (
+        return new AAssignStatement (
             (TId)CloneNode (_id_),
             (TAssign)CloneNode (_assign_),
             (PExpression)CloneNode (_expression_),
@@ -2434,7 +2434,7 @@ public sealed class AMathAssignAssignStatement : PAssignStatement
 
     public override void Apply(Switch sw)
     {
-        ((Analysis) sw).CaseAMathAssignAssignStatement(this);
+        ((Analysis) sw).CaseAAssignStatement(this);
     }
 
     public TId GetId ()
@@ -2593,7 +2593,7 @@ public sealed class AMathAssignAssignStatement : PAssignStatement
     }
 
 }
-public sealed class AActualParamFunctionCallStatement : PFunctionCallStatement
+public sealed class AFunctionCallStatement : PFunctionCallStatement
 {
     private TId _id_;
     private TOpenParenthesis _open_parenthesis_;
@@ -2601,11 +2601,11 @@ public sealed class AActualParamFunctionCallStatement : PFunctionCallStatement
     private TCloseParenthesis _close_parenthesis_;
     private TEol _eol_;
 
-    public AActualParamFunctionCallStatement ()
+    public AFunctionCallStatement ()
     {
     }
 
-    public AActualParamFunctionCallStatement (
+    public AFunctionCallStatement (
             TId _id_,
             TOpenParenthesis _open_parenthesis_,
             PActualParameters _actual_parameters_,
@@ -2622,7 +2622,7 @@ public sealed class AActualParamFunctionCallStatement : PFunctionCallStatement
 
     public override Object Clone()
     {
-        return new AActualParamFunctionCallStatement (
+        return new AFunctionCallStatement (
             (TId)CloneNode (_id_),
             (TOpenParenthesis)CloneNode (_open_parenthesis_),
             (PActualParameters)CloneNode (_actual_parameters_),
@@ -2633,7 +2633,7 @@ public sealed class AActualParamFunctionCallStatement : PFunctionCallStatement
 
     public override void Apply(Switch sw)
     {
-        ((Analysis) sw).CaseAActualParamFunctionCallStatement(this);
+        ((Analysis) sw).CaseAFunctionCallStatement(this);
     }
 
     public TId GetId ()

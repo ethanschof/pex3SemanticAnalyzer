@@ -809,7 +809,7 @@ public class Parser
         TOpenBracket topenbracketNode7 = (TOpenBracket)nodeArrayList6[0];
         PStatements pstatementsNode8 = (PStatements)nodeArrayList7[0];
         TCloseBracket tclosebracketNode9 = (TCloseBracket)nodeArrayList8[0];
-        AOneFunctionFunction pfunctionNode1 = new AOneFunctionFunction (
+        AFunction pfunctionNode1 = new AFunction (
               tfuncNode2,
               tidNode3,
               topenparenthesisNode4,
@@ -958,7 +958,7 @@ public class Parser
         TId tidNode2 = (TId)nodeArrayList1[0];
         TId tidNode3 = (TId)nodeArrayList2[0];
         TEol teolNode4 = (TEol)nodeArrayList3[0];
-        AVariableDeclareDeclareStatement pdeclarestatementNode1 = new AVariableDeclareDeclareStatement (
+        ADeclareStatement pdeclarestatementNode1 = new ADeclareStatement (
               tidNode2,
               tidNode3,
               teolNode4
@@ -977,7 +977,7 @@ public class Parser
         TAssign tassignNode3 = (TAssign)nodeArrayList2[0];
         PExpression pexpressionNode4 = (PExpression)nodeArrayList3[0];
         TEol teolNode5 = (TEol)nodeArrayList4[0];
-        AMathAssignAssignStatement passignstatementNode1 = new AMathAssignAssignStatement (
+        AAssignStatement passignstatementNode1 = new AAssignStatement (
               tidNode2,
               tassignNode3,
               pexpressionNode4,
@@ -999,7 +999,7 @@ public class Parser
         PActualParameters pactualparametersNode4 = (PActualParameters)nodeArrayList3[0];
         TCloseParenthesis tcloseparenthesisNode5 = (TCloseParenthesis)nodeArrayList4[0];
         TEol teolNode6 = (TEol)nodeArrayList5[0];
-        AActualParamFunctionCallStatement pfunctioncallstatementNode1 = new AActualParamFunctionCallStatement (
+        AFunctionCallStatement pfunctioncallstatementNode1 = new AFunctionCallStatement (
               tidNode2,
               topenparenthesisNode3,
               pactualparametersNode4,

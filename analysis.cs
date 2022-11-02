@@ -21,7 +21,7 @@ public interface Analysis : Switch
     void CaseAConstantDeclareConstant(AConstantDeclareConstant node);
     void CaseAMultipleFunctionsFunctions(AMultipleFunctionsFunctions node);
     void CaseANoFunctionsFunctions(ANoFunctionsFunctions node);
-    void CaseAOneFunctionFunction(AOneFunctionFunction node);
+    void CaseAFunction(AFunction node);
     void CaseAManyParams(AManyParams node);
     void CaseAOneParams(AOneParams node);
     void CaseAOneParamParam(AOneParamParam node);
@@ -33,9 +33,9 @@ public interface Analysis : Switch
     void CaseAFuncCallStatement(AFuncCallStatement node);
     void CaseAIfstateStatement(AIfstateStatement node);
     void CaseAWhileLoopStatement(AWhileLoopStatement node);
-    void CaseAVariableDeclareDeclareStatement(AVariableDeclareDeclareStatement node);
-    void CaseAMathAssignAssignStatement(AMathAssignAssignStatement node);
-    void CaseAActualParamFunctionCallStatement(AActualParamFunctionCallStatement node);
+    void CaseADeclareStatement(ADeclareStatement node);
+    void CaseAAssignStatement(AAssignStatement node);
+    void CaseAFunctionCallStatement(AFunctionCallStatement node);
     void CaseAManyActualParameters(AManyActualParameters node);
     void CaseASingleActualParameters(ASingleActualParameters node);
     void CaseAActualParamActualParam(AActualParamActualParam node);
@@ -193,7 +193,7 @@ public class AnalysisAdapter : Analysis
     {
         DefaultCase(node);
     }
-    public virtual void CaseAOneFunctionFunction(AOneFunctionFunction node)
+    public virtual void CaseAFunction(AFunction node)
     {
         DefaultCase(node);
     }
@@ -241,15 +241,15 @@ public class AnalysisAdapter : Analysis
     {
         DefaultCase(node);
     }
-    public virtual void CaseAVariableDeclareDeclareStatement(AVariableDeclareDeclareStatement node)
+    public virtual void CaseADeclareStatement(ADeclareStatement node)
     {
         DefaultCase(node);
     }
-    public virtual void CaseAMathAssignAssignStatement(AMathAssignAssignStatement node)
+    public virtual void CaseAAssignStatement(AAssignStatement node)
     {
         DefaultCase(node);
     }
-    public virtual void CaseAActualParamFunctionCallStatement(AActualParamFunctionCallStatement node)
+    public virtual void CaseAFunctionCallStatement(AFunctionCallStatement node)
     {
         DefaultCase(node);
     }
@@ -712,19 +712,19 @@ public class DepthFirstAdapter : AnalysisAdapter
         InANoFunctionsFunctions(node);
         OutANoFunctionsFunctions(node);
     }
-    public virtual void InAOneFunctionFunction(AOneFunctionFunction node)
+    public virtual void InAFunction(AFunction node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAOneFunctionFunction(AOneFunctionFunction node)
+    public virtual void OutAFunction(AFunction node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAOneFunctionFunction(AOneFunctionFunction node)
+    public override void CaseAFunction(AFunction node)
     {
-        InAOneFunctionFunction(node);
+        InAFunction(node);
         if(node.GetFunc() != null)
         {
             node.GetFunc().Apply(this);
@@ -757,7 +757,7 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetCloseBracket().Apply(this);
         }
-        OutAOneFunctionFunction(node);
+        OutAFunction(node);
     }
     public virtual void InAManyParams(AManyParams node)
     {
@@ -976,19 +976,19 @@ public class DepthFirstAdapter : AnalysisAdapter
         }
         OutAWhileLoopStatement(node);
     }
-    public virtual void InAVariableDeclareDeclareStatement(AVariableDeclareDeclareStatement node)
+    public virtual void InADeclareStatement(ADeclareStatement node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAVariableDeclareDeclareStatement(AVariableDeclareDeclareStatement node)
+    public virtual void OutADeclareStatement(ADeclareStatement node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAVariableDeclareDeclareStatement(AVariableDeclareDeclareStatement node)
+    public override void CaseADeclareStatement(ADeclareStatement node)
     {
-        InAVariableDeclareDeclareStatement(node);
+        InADeclareStatement(node);
         if(node.GetType() != null)
         {
             node.GetType().Apply(this);
@@ -1001,21 +1001,21 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetEol().Apply(this);
         }
-        OutAVariableDeclareDeclareStatement(node);
+        OutADeclareStatement(node);
     }
-    public virtual void InAMathAssignAssignStatement(AMathAssignAssignStatement node)
+    public virtual void InAAssignStatement(AAssignStatement node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAMathAssignAssignStatement(AMathAssignAssignStatement node)
+    public virtual void OutAAssignStatement(AAssignStatement node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAMathAssignAssignStatement(AMathAssignAssignStatement node)
+    public override void CaseAAssignStatement(AAssignStatement node)
     {
-        InAMathAssignAssignStatement(node);
+        InAAssignStatement(node);
         if(node.GetId() != null)
         {
             node.GetId().Apply(this);
@@ -1032,21 +1032,21 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetEol().Apply(this);
         }
-        OutAMathAssignAssignStatement(node);
+        OutAAssignStatement(node);
     }
-    public virtual void InAActualParamFunctionCallStatement(AActualParamFunctionCallStatement node)
+    public virtual void InAFunctionCallStatement(AFunctionCallStatement node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAActualParamFunctionCallStatement(AActualParamFunctionCallStatement node)
+    public virtual void OutAFunctionCallStatement(AFunctionCallStatement node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAActualParamFunctionCallStatement(AActualParamFunctionCallStatement node)
+    public override void CaseAFunctionCallStatement(AFunctionCallStatement node)
     {
-        InAActualParamFunctionCallStatement(node);
+        InAFunctionCallStatement(node);
         if(node.GetId() != null)
         {
             node.GetId().Apply(this);
@@ -1067,7 +1067,7 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetEol().Apply(this);
         }
-        OutAActualParamFunctionCallStatement(node);
+        OutAFunctionCallStatement(node);
     }
     public virtual void InAManyActualParameters(AManyActualParameters node)
     {
@@ -2104,19 +2104,19 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         InANoFunctionsFunctions(node);
         OutANoFunctionsFunctions(node);
     }
-    public virtual void InAOneFunctionFunction(AOneFunctionFunction node)
+    public virtual void InAFunction(AFunction node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAOneFunctionFunction(AOneFunctionFunction node)
+    public virtual void OutAFunction(AFunction node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAOneFunctionFunction(AOneFunctionFunction node)
+    public override void CaseAFunction(AFunction node)
     {
-        InAOneFunctionFunction(node);
+        InAFunction(node);
         if(node.GetCloseBracket() != null)
         {
             node.GetCloseBracket().Apply(this);
@@ -2149,7 +2149,7 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         {
             node.GetFunc().Apply(this);
         }
-        OutAOneFunctionFunction(node);
+        OutAFunction(node);
     }
     public virtual void InAManyParams(AManyParams node)
     {
@@ -2368,19 +2368,19 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         }
         OutAWhileLoopStatement(node);
     }
-    public virtual void InAVariableDeclareDeclareStatement(AVariableDeclareDeclareStatement node)
+    public virtual void InADeclareStatement(ADeclareStatement node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAVariableDeclareDeclareStatement(AVariableDeclareDeclareStatement node)
+    public virtual void OutADeclareStatement(ADeclareStatement node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAVariableDeclareDeclareStatement(AVariableDeclareDeclareStatement node)
+    public override void CaseADeclareStatement(ADeclareStatement node)
     {
-        InAVariableDeclareDeclareStatement(node);
+        InADeclareStatement(node);
         if(node.GetEol() != null)
         {
             node.GetEol().Apply(this);
@@ -2393,21 +2393,21 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         {
             node.GetType().Apply(this);
         }
-        OutAVariableDeclareDeclareStatement(node);
+        OutADeclareStatement(node);
     }
-    public virtual void InAMathAssignAssignStatement(AMathAssignAssignStatement node)
+    public virtual void InAAssignStatement(AAssignStatement node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAMathAssignAssignStatement(AMathAssignAssignStatement node)
+    public virtual void OutAAssignStatement(AAssignStatement node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAMathAssignAssignStatement(AMathAssignAssignStatement node)
+    public override void CaseAAssignStatement(AAssignStatement node)
     {
-        InAMathAssignAssignStatement(node);
+        InAAssignStatement(node);
         if(node.GetEol() != null)
         {
             node.GetEol().Apply(this);
@@ -2424,21 +2424,21 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         {
             node.GetId().Apply(this);
         }
-        OutAMathAssignAssignStatement(node);
+        OutAAssignStatement(node);
     }
-    public virtual void InAActualParamFunctionCallStatement(AActualParamFunctionCallStatement node)
+    public virtual void InAFunctionCallStatement(AFunctionCallStatement node)
     {
         DefaultIn(node);
     }
 
-    public virtual void OutAActualParamFunctionCallStatement(AActualParamFunctionCallStatement node)
+    public virtual void OutAFunctionCallStatement(AFunctionCallStatement node)
     {
         DefaultOut(node);
     }
 
-    public override void CaseAActualParamFunctionCallStatement(AActualParamFunctionCallStatement node)
+    public override void CaseAFunctionCallStatement(AFunctionCallStatement node)
     {
-        InAActualParamFunctionCallStatement(node);
+        InAFunctionCallStatement(node);
         if(node.GetEol() != null)
         {
             node.GetEol().Apply(this);
@@ -2459,7 +2459,7 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         {
             node.GetId().Apply(this);
         }
-        OutAActualParamFunctionCallStatement(node);
+        OutAFunctionCallStatement(node);
     }
     public virtual void InAManyActualParameters(AManyActualParameters node)
     {
