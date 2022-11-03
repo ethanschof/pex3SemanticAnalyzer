@@ -1,2 +1,10 @@
 C:\Users\C23Ethan.Schofield\Documents\Fall 2022\CS426\PEX Starter Pack\obj\x86\Debug\ConsoleApplication.exe
 C:\Users\C23Ethan.Schofield\Documents\Fall 2022\CS426\PEX Starter Pack\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\obj\x86\Debug\pex3SA.csproj.AssemblyReference.cache
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\obj\x86\Debug\pex3SA.csproj.SuggestedBindingRedirects.cache
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\obj\x86\Debug\pex3SA.csproj.CoreCompileInputs.cache
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\bin\Debug\ConsoleApplication.exe.config
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\bin\Debug\ConsoleApplication.exe
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\bin\Debug\ConsoleApplication.pdb

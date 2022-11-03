@@ -161,6 +161,37 @@ namespace CS426.analysis
         // expression_math2
         // ----------------------------------------------------------------
 
+        public override void OutAMultiplyExpressionMath2(AMultiplyExpressionMath2 node)
+        {
+            Definition expressionMath2Def;
+            Definition expressionMath3Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath2(), out expressionMath2Def))
+            {
+                // error but occured lower on the tree
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpressionMath3(), out expressionMath3Def))
+            {
+                // error occured lower on the tree
+            }
+            else if (expressionMath2Def.GetType() != expressionMath3Def.GetType())
+            {
+                PrintWarning(node.GetMult(), "Cannot multiply " + expressionMath2Def.name + " by " + expressionMath3Def.name);
+            } 
+            else if (!(expressionMath2Def is IntegerDefinition) || !(expressionMath2Def is FloatDefinition))
+            {
+                PrintWarning(node.GetMult(), "You can only multiply integers and floats");
+            }
+            else if (!(expressionMath3Def is IntegerDefinition) || !(expressionMath3Def is FloatDefinition))
+            {
+                PrintWarning(node.GetMult(), "You can only multiply integers and floats");
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expressionMath2Def);
+            }
+        }
+
         // ----------------------------------------------------------------
         // expression_math1
         // ----------------------------------------------------------------
@@ -200,6 +231,21 @@ namespace CS426.analysis
         // ----------------------------------------------------------------
         // function_call_statement
         // ----------------------------------------------------------------
+        public override void OutAFunctionCallStatement(AFunctionCallStatement node)
+        {
+            Definition idDef;
+
+            if (!globalSymbolTable.TryGetValue(node.GetId().Text, out idDef))
+            {
+                PrintWarning(node.GetId(), "Identifier " + node.GetId().Text + " was not registered in the global symbol table");
+            } 
+            else if (!(idDef is FunctionDefinition))
+            {
+                PrintWarning(node.GetId(), "Identifier " + node.GetId().Text + " is not a function definition");
+            }
+            // HOW DO I CHECK THE ARGUEMENTS TO THE PARAMETERS IN THE DEFINITION)
+            
+        }
 
         // ----------------------------------------------------------------
         // assign_statement
@@ -272,13 +318,6 @@ namespace CS426.analysis
             }
         }
 
-        // ----------------------------------------------------------------
-        // statement
-        // ----------------------------------------------------------------
-
-        // ----------------------------------------------------------------
-        // statements
-        // ----------------------------------------------------------------
 
         // ----------------------------------------------------------------
         // param
