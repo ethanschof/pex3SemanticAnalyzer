@@ -39,7 +39,7 @@ namespace CS426.analysis
         }
 
         // ----------------------------------------------------------------
-        // operand
+        // operand DONE
         // ----------------------------------------------------------------
         public override void OutAIntOperand(AIntOperand node)
         {
@@ -99,7 +99,7 @@ namespace CS426.analysis
         }
 
         // ----------------------------------------------------------------
-        // expression_math4
+        // expression_math4 DONE
         // ----------------------------------------------------------------
         public override void OutAPassExpressionMath4(APassExpressionMath4 node)
         {
@@ -117,11 +117,20 @@ namespace CS426.analysis
 
         public override void OutAParenthesisExpressionMath4(AParenthesisExpressionMath4 node)
         {
-            
+            Definition expressionMath1;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath1(), out expressionMath1))
+            {
+                // Problem occured lower on the tree
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expressionMath1);
+            }
         }
 
         // ----------------------------------------------------------------
-        // expression_math3
+        // expression_math3 DONE
         // ----------------------------------------------------------------
 
         public override void OutAPassExpressionMath3(APassExpressionMath3 node)
@@ -157,8 +166,27 @@ namespace CS426.analysis
             }
         }
 
+        public override void OutABitnotExpressionMath3(ABitnotExpressionMath3 node)
+        {
+            Definition expressionMath4;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath4(), out expressionMath4))
+            {
+                // Problem occured lower on the tree
+            }
+            // The thing being bitted is not a float or an integer
+            else if (!(expressionMath4 is IntegerDefinition) && !(expressionMath4 is FloatDefinition))
+            {
+                PrintWarning(node.GetBitNot(), "Only floats and integers can be negated");
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expressionMath4);
+            }
+        }
+
         // ----------------------------------------------------------------
-        // expression_math2
+        // expression_math2 DONE
         // ----------------------------------------------------------------
 
         public override void OutAMultiplyExpressionMath2(AMultiplyExpressionMath2 node)
@@ -192,25 +220,197 @@ namespace CS426.analysis
             }
         }
 
+        public override void OutADivideExpressionMath2(ADivideExpressionMath2 node)
+        {
+            Definition expressionMath2Def;
+            Definition expressionMath3Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath2(), out expressionMath2Def))
+            {
+                // error but occured lower on the tree
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpressionMath3(), out expressionMath3Def))
+            {
+                // error occured lower on the tree
+            }
+            else if (expressionMath2Def.GetType() != expressionMath3Def.GetType())
+            {
+                PrintWarning(node.GetDivide(), "Cannot divide " + expressionMath2Def.name + " by " + expressionMath3Def.name);
+            }
+            else if (!(expressionMath2Def is IntegerDefinition) || !(expressionMath2Def is FloatDefinition))
+            {
+                PrintWarning(node.GetDivide(), "You can only divide integers and floats");
+            }
+            else if (!(expressionMath3Def is IntegerDefinition) || !(expressionMath3Def is FloatDefinition))
+            {
+                PrintWarning(node.GetDivide(), "You can only divide integers and floats");
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expressionMath2Def);
+            }
+        }
+
+        public override void OutAPassExpressionMath2(APassExpressionMath2 node)
+        {
+            Definition expressionMath3;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath3(), out expressionMath3))
+            {
+                // Problem occured lower on the tree
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expressionMath3);
+            }
+        }
+
         // ----------------------------------------------------------------
-        // expression_math1
+        // expression_math1 DONE
         // ----------------------------------------------------------------
+        public override void OutAPassExpressionMath1(APassExpressionMath1 node)
+        {
+            Definition expressionMath2;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath2(), out expressionMath2))
+            {
+                // Problem occured lower on the tree
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expressionMath2);
+            }
+        }
+
+        public override void OutAAddExpressionMath1(AAddExpressionMath1 node)
+        {
+            Definition expressionMath1Def;
+            Definition expressionMath2Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath1(), out expressionMath1Def))
+            {
+                // error but occured lower on the tree
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpressionMath2(), out expressionMath2Def))
+            {
+                // error occured lower on the tree
+            }
+            else if (expressionMath1Def.GetType() != expressionMath2Def.GetType())
+            {
+                PrintWarning(node.GetPlus(), "Cannot add " + expressionMath1Def.name + " to " + expressionMath2Def.name);
+            }
+            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
+            {
+                PrintWarning(node.GetPlus(), "You can only add integers and floats");
+            }
+            else if (!(expressionMath2Def is IntegerDefinition) || !(expressionMath2Def is FloatDefinition))
+            {
+                PrintWarning(node.GetPlus(), "You can only add integers and floats");
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expressionMath1Def);
+            }
+        }
+
+        public override void OutASubtractExpressionMath1(ASubtractExpressionMath1 node)
+        {
+            Definition expressionMath1Def;
+            Definition expressionMath2Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath1(), out expressionMath1Def))
+            {
+                // error but occured lower on the tree
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpressionMath2(), out expressionMath2Def))
+            {
+                // error occured lower on the tree
+            }
+            else if (expressionMath1Def.GetType() != expressionMath2Def.GetType())
+            {
+                PrintWarning(node.GetMinus(), "Cannot subtract " + expressionMath1Def.name + " by " + expressionMath2Def.name);
+            }
+            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
+            {
+                PrintWarning(node.GetMinus(), "You can only subtract integers and floats");
+            }
+            else if (!(expressionMath2Def is IntegerDefinition) || !(expressionMath2Def is FloatDefinition))
+            {
+                PrintWarning(node.GetMinus(), "You can only subtract integers and floats");
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expressionMath1Def);
+            }
+        }
 
         // ----------------------------------------------------------------
         // expression4
         // ----------------------------------------------------------------
+        public override void OutAPassExpression4(APassExpression4 node)
+        {
+            Definition expressionMath1;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath1(), out expressionMath1))
+            {
+                // Problem occured lower on the tree
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expressionMath1);
+            }
+        }
 
         // ----------------------------------------------------------------
         // expression3
         // ----------------------------------------------------------------
+        public override void OutAPassExpression3(APassExpression3 node)
+        {
+            Definition expression4;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression4(), out expression4))
+            {
+                // Problem occured lower on the tree
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expression4);
+            }
+        }
 
         // ----------------------------------------------------------------
         // expression2
         // ----------------------------------------------------------------
+        public override void OutAPassExpression2(APassExpression2 node)
+        {
+            Definition expression3;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression3(), out expression3))
+            {
+                // Problem occured lower on the tree
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expression3);
+            }
+        }
 
         // ----------------------------------------------------------------
         // expression
         // ----------------------------------------------------------------
+        public override void OutAPassExpression(APassExpression node)
+        {
+            Definition expression2;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression2(), out expression2))
+            {
+                // Problem occured lower on the tree
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expression2);
+            }
+        }
 
         // ----------------------------------------------------------------
         // while_statement
