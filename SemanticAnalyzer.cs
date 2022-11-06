@@ -448,7 +448,7 @@ namespace CS426.analysis
         }
 
         // ----------------------------------------------------------------
-        // assign_statement
+        // assign_statement DONE
         // ----------------------------------------------------------------
 
         public override void OutAAssignStatement(AAssignStatement node)
@@ -480,7 +480,7 @@ namespace CS426.analysis
 
 
         // ----------------------------------------------------------------
-        // declare_statement
+        // declare_statement DONE
         // ----------------------------------------------------------------
         public override void OutADeclareStatement(ADeclareStatement node)
         {
