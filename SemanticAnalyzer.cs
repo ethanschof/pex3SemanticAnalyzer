@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace CS426.analysis
@@ -416,17 +417,55 @@ namespace CS426.analysis
         // while_statement
         // ----------------------------------------------------------------
 
+
         // ----------------------------------------------------------------
         // if_statement
         // ----------------------------------------------------------------
 
         // ----------------------------------------------------------------
-        // actual_param
+        // actual_param DONE BY JD, PLS CHECK
         // ----------------------------------------------------------------
+        public override void OutAActualParamActualParam(AActualParamActualParam node)
+        {
+            Definition expressionDef;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression(), out expressionDef))
+            {
+                // Error was already printed lower in the parse tree if this error occured
+            }
+        }
 
         // ----------------------------------------------------------------
-        // actual_parameters
+        // actual_parameters DONE BY JD, CHECK PLS
         // ----------------------------------------------------------------
+        public override void OutAManyActualParameters(AManyActualParameters node)
+        {
+            Definition actualParamDef;
+            Definition actualParametersDef;
+
+            if (!decoratedParseTree.TryGetValue(node.GetActualParam(), out actualParamDef))
+            {
+                // Error was already printed lower in the parse tree if this error occured
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetActualParameters(), out actualParametersDef))
+            {
+                // Error was already printed lower in the parse tree if this error occured
+            }
+            else
+            {
+                // No errors found
+            }
+
+        }
+        public override void OutASingleActualParameters(ASingleActualParameters node)
+        {
+            Definition actualParamDef;
+
+            if (!decoratedParseTree.TryGetValue(node.GetActualParam(), out actualParamDef))
+            {
+                // Error was already printed lower in the parse tree if this error occured
+            }
+        }
 
         // ----------------------------------------------------------------
         // function_call_statement
@@ -523,6 +562,37 @@ namespace CS426.analysis
         // param
         // ----------------------------------------------------------------
 
+        public override void OutAOneParamParam(AOneParamParam node)
+        {
+            Definition typeDef;
+            Definition idDef;
+
+            if (!globalSymbolTable.TryGetValue(node.GetType().Text, out typeDef))
+            {
+                // Check if the type is a valid type
+                PrintWarning(node.GetType(), "Type " + node.GetType().Text + " does not exist");
+            }
+            // Make sure the type is a type and not something else in the symbol table
+            else if (!(typeDef is TypeDefinition))
+            {
+                PrintWarning(node.GetType(), "Type " + node.GetType().Text + " is not a recognized data type");
+            }
+            else if (localSymbolTable.TryGetValue(node.GetVarname().Text, out idDef))
+            {
+                // Check if variable name is already being used
+                PrintWarning(node.GetVarname(), "ID already declared in local symbol table");
+            }
+            else if (!globalSymbolTable.TryGetValue(node.GetVarname().Text, out idDef))
+            {
+                // variable name does not exist in global, maybe a function, maybe tried to name something int
+                PrintWarning(node.GetVarname(), "ID doesn't exist in global symbol table");
+            }
+            else
+            {
+                // Everything is correct
+            }
+        }
+
         // ----------------------------------------------------------------
         // params
         // ----------------------------------------------------------------
@@ -536,8 +606,45 @@ namespace CS426.analysis
         // ----------------------------------------------------------------
 
         // ----------------------------------------------------------------
-        // constant
+        // constant POSSIBLY DONE, CHECK PLS
         // ----------------------------------------------------------------
+
+        public override void OutAConstantDeclareConstant(AConstantDeclareConstant node)
+        {
+            // Create the definition
+            Definition typeDef;
+            Definition idDef;
+
+            if (!globalSymbolTable.TryGetValue(node.GetType().Text, out typeDef))
+            {
+                // Check if the type is a valid type
+                PrintWarning(node.GetType(), "Type " + node.GetType().Text + " does not exist");
+            }
+            // Make sure the type is a type and not something else in the symbol table
+            else if (!(typeDef is TypeDefinition))
+            {
+                PrintWarning(node.GetType(), "Type " + node.GetType().Text + " is not a recognized data type");
+            }
+            else if (localSymbolTable.TryGetValue(node.GetVarname().Text, out idDef))
+            {
+                // Check if variable name is already being used
+                PrintWarning(node.GetVarname(), "ID already declared in local symbol table");
+            }
+            else if (globalSymbolTable.TryGetValue(node.GetVarname().Text, out idDef))
+            {
+                // variable name was already used in global, maybe a function, maybe tried to name something int
+                PrintWarning(node.GetVarname(), "ID already declared in global symbol table");
+            }
+            else
+            {
+                VariableDefinition newConstant = new VariableDefinition();
+                newConstant.name = node.GetVarname().Text;
+                newConstant.variableType = (TypeDefinition)typeDef;
+
+                globalSymbolTable.Add(node.GetVarname().Text, newConstant);
+            }
+
+        }
 
         // ----------------------------------------------------------------
         // constants
