@@ -414,13 +414,58 @@ namespace CS426.analysis
         }
 
         // ----------------------------------------------------------------
+        // GreaterEQ ADDED BY JD, CHECK
+        // ----------------------------------------------------------------
+        public override void OutAGreateqExpression4(AGreateqExpression4 node)
+        {
+            Definition expressionMath1Def;
+            Definition expression4Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath1(), out expressionMath1Def))
+            {
+                // Problem occured lower on the tree
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpression4(), out expression4Def))
+            {
+                // Problem occured lower on the tree
+            }
+            else if ((expressionMath1Def.GetType() != expression4Def.GetType()))
+            {
+                PrintWarning(node.GetGreatEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
+            }
+            else if (!(expressionMath1Def is IntegerDefinition))
+            {
+                PrintWarning(node.GetGreatEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
+            }
+            else
+            {
+                decoratedParseTree.Add(node, new BooleanDefinition());
+            }
+        }
+
+        // ----------------------------------------------------------------
         // while_statement
         // ----------------------------------------------------------------
 
+            // TODO
 
         // ----------------------------------------------------------------
-        // if_statement
+        // if_statement TODO
         // ----------------------------------------------------------------
+        public override void OutAIfstateStatement(AIfstateStatement node)
+        {
+            Definition ifConditionalDef;
+
+            if (!decoratedParseTree.TryGetValue(node.GetIfStatement(), out ifConditionalDef))
+            {
+                // TODO: NEED TO PRINT ERROR MESSAGE
+            }
+            else if (!(ifConditionalDef is BooleanDefinition))
+            {
+               // TODO: NEED TO PRINT ERROR MESSAGE
+            }
+            
+        }
 
         // ----------------------------------------------------------------
         // actual_param DONE BY JD, PLS CHECK
@@ -483,6 +528,14 @@ namespace CS426.analysis
                 PrintWarning(node.GetId(), "Identifier " + node.GetId().Text + " is not a function definition");
             }
             // HOW DO I CHECK THE ARGUEMENTS TO THE PARAMETERS IN THE DEFINITION)
+
+            // INA is everything you going into a node
+
+            // OUTA is everything you know out of a node
+
+            // CASEA everything you know going into the node
+
+
             
         }
 
