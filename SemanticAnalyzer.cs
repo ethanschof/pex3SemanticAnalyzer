@@ -12,6 +12,8 @@ namespace CS426.analysis
         Dictionary<string, Definition> globalSymbolTable;
         Dictionary<string, Definition> localSymbolTable;
         Dictionary<Node, Definition> decoratedParseTree;
+        List<VariableDefinition> parameters;
+        List<TypeDefinition> args;
 
         void PrintWarning(Token t, String message)
         {
@@ -414,7 +416,7 @@ namespace CS426.analysis
         }
 
         // ----------------------------------------------------------------
-        // GreaterEQ ADDED BY JD, CHECK
+        // GreaterEQ DONE
         // ----------------------------------------------------------------
         public override void OutAGreateqExpression4(AGreateqExpression4 node)
         {
@@ -447,28 +449,43 @@ namespace CS426.analysis
         // while_statement
         // ----------------------------------------------------------------
 
-            // TODO
+        // TODO
 
         // ----------------------------------------------------------------
-        // if_statement TODO
+        // if_statement DONE
         // ----------------------------------------------------------------
-        public override void OutAIfstateStatement(AIfstateStatement node)
+
+        public override void OutAJustifIfStatement(AJustifIfStatement node)
         {
             Definition ifConditionalDef;
 
-            if (!decoratedParseTree.TryGetValue(node.GetIfStatement(), out ifConditionalDef))
+            if (!decoratedParseTree.TryGetValue(node.GetExpression(), out ifConditionalDef))
             {
-                // TODO: NEED TO PRINT ERROR MESSAGE
+                // Error occured lower in the tree
             }
             else if (!(ifConditionalDef is BooleanDefinition))
             {
-               // TODO: NEED TO PRINT ERROR MESSAGE
+                PrintWarning(node.GetIf(), "Conditional is not in boolean form");
             }
-            
         }
 
+        public override void OutAIfelseIfStatement(AIfelseIfStatement node)
+        {
+            Definition ifConditionalDef;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression(), out ifConditionalDef))
+            {
+                // Error occured lower in the tree
+            }
+            else if (!(ifConditionalDef is BooleanDefinition))
+            {
+                PrintWarning(node.GetIf(), "Conditional is not in boolean form");
+            }
+        }
+
+
         // ----------------------------------------------------------------
-        // actual_param DONE BY JD, PLS CHECK
+        // actual_param DONE
         // ----------------------------------------------------------------
         public override void OutAActualParamActualParam(AActualParamActualParam node)
         {
@@ -477,66 +494,58 @@ namespace CS426.analysis
             if (!decoratedParseTree.TryGetValue(node.GetExpression(), out expressionDef))
             {
                 // Error was already printed lower in the parse tree if this error occured
-            }
-        }
-
-        // ----------------------------------------------------------------
-        // actual_parameters DONE BY JD, CHECK PLS
-        // ----------------------------------------------------------------
-        public override void OutAManyActualParameters(AManyActualParameters node)
-        {
-            Definition actualParamDef;
-            Definition actualParametersDef;
-
-            if (!decoratedParseTree.TryGetValue(node.GetActualParam(), out actualParamDef))
-            {
-                // Error was already printed lower in the parse tree if this error occured
-            }
-            else if (!decoratedParseTree.TryGetValue(node.GetActualParameters(), out actualParametersDef))
-            {
-                // Error was already printed lower in the parse tree if this error occured
-            }
+            } 
             else
             {
-                // No errors found
+                // place the function call arguement into args global
+                args.Add((TypeDefinition)expressionDef);
             }
-
         }
-        public override void OutASingleActualParameters(ASingleActualParameters node)
+
+
+        // ----------------------------------------------------------------
+        // function_call_statement DONE
+        // ----------------------------------------------------------------
+        public override void InAFunctionCallStatement(AFunctionCallStatement node)
         {
-            Definition actualParamDef;
-
-            if (!decoratedParseTree.TryGetValue(node.GetActualParam(), out actualParamDef))
-            {
-                // Error was already printed lower in the parse tree if this error occured
-            }
+            List<TypeDefinition> args = new List<TypeDefinition>();
         }
 
-        // ----------------------------------------------------------------
-        // function_call_statement
-        // ----------------------------------------------------------------
         public override void OutAFunctionCallStatement(AFunctionCallStatement node)
         {
             Definition idDef;
 
+            // function not in global table
             if (!globalSymbolTable.TryGetValue(node.GetId().Text, out idDef))
             {
                 PrintWarning(node.GetId(), "Identifier " + node.GetId().Text + " was not registered in the global symbol table");
             } 
+            // variable is registered as a function
             else if (!(idDef is FunctionDefinition))
             {
                 PrintWarning(node.GetId(), "Identifier " + node.GetId().Text + " is not a function definition");
+            } 
+            else
+            {
+                FunctionDefinition func = (FunctionDefinition)idDef;
+                // Make sure number of arguements and parameters are the same
+                if (!(args.Count == func.parameters.Count) || !((func.parameters.Count == 0) && (parameters.Count == args.Count)) )
+                {
+                    PrintWarning(node.GetId(), "Incorrect number of arguments for function call");
+                } 
+                else 
+                {
+                    // Loop through to check each type of arguement and variable
+                    for (var i = 0; i < args.Count; i++)
+                    {
+                        if(args[i].GetType() != func.parameters[i].GetType())
+                        {
+                            PrintWarning(node.GetId(), "Types do not match between declaration and call");
+                        }
+                    }
+                }
+
             }
-            // HOW DO I CHECK THE ARGUEMENTS TO THE PARAMETERS IN THE DEFINITION)
-
-            // INA is everything you going into a node
-
-            // OUTA is everything you know out of a node
-
-            // CASEA everything you know going into the node
-
-
-            
         }
 
         // ----------------------------------------------------------------
@@ -612,7 +621,7 @@ namespace CS426.analysis
 
 
         // ----------------------------------------------------------------
-        // param
+        // param DONE
         // ----------------------------------------------------------------
 
         public override void OutAOneParamParam(AOneParamParam node)
@@ -643,23 +652,55 @@ namespace CS426.analysis
             else
             {
                 // Everything is correct
+                parameters.Add((VariableDefinition)typeDef);
             }
         }
 
         // ----------------------------------------------------------------
-        // params
+        // function DONE
         // ----------------------------------------------------------------
+        public override void InAFunction(AFunction node)
+        {
+            // Refresh the parameters list
+            List<VariableDefinition> parameters = new List<VariableDefinition>();
+
+            Definition idDef;
+
+            if (globalSymbolTable.TryGetValue(node.GetId().Text, out idDef))
+            {
+                PrintWarning(node.GetId(), "Identifier " + node.GetId().Text + " is already being used");
+            } 
+            else
+            {
+                localSymbolTable = new Dictionary<string, Definition>();
+
+                // Register the new function definition in teh global table
+                FunctionDefinition newFunctionDefinition = new FunctionDefinition();
+                newFunctionDefinition.name = node.GetId().Text;
+
+                newFunctionDefinition.parameters = new List<VariableDefinition>();
+
+                globalSymbolTable.Add(node.GetId().Text, newFunctionDefinition);
+            }
+        }
+
+        public override void OutAFunction(AFunction node)
+        {
+            globalSymbolTable.Remove(node.GetId().Text);
+
+            FunctionDefinition newFunctionDefinition = new FunctionDefinition();
+            newFunctionDefinition.name = node.GetId().Text;
+
+            newFunctionDefinition.parameters = parameters;
+            globalSymbolTable.Add(node.GetId().Text, newFunctionDefinition);
+
+            // Wipe global paramaters variable
+            parameters = new List<VariableDefinition>();
+        }
+
 
         // ----------------------------------------------------------------
-        // function
-        // ----------------------------------------------------------------
-
-        // ----------------------------------------------------------------
-        // functions
-        // ----------------------------------------------------------------
-
-        // ----------------------------------------------------------------
-        // constant POSSIBLY DONE, CHECK PLS
+        // constant DONE
         // ----------------------------------------------------------------
 
         public override void OutAConstantDeclareConstant(AConstantDeclareConstant node)
@@ -698,11 +739,6 @@ namespace CS426.analysis
             }
 
         }
-
-        // ----------------------------------------------------------------
-        // constants
-        // ----------------------------------------------------------------
-
 
 
     }
