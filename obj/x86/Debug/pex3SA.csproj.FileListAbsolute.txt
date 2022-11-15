@@ -8,3 +8,11 @@ C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\obj\x86\Debug\
 C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\bin\Debug\ConsoleApplication.exe.config
 C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\bin\Debug\ConsoleApplication.exe
 C:\Users\C23Ethan.Schofield\Documents\GitHub\pex3SemanticAnalyzer\bin\Debug\ConsoleApplication.pdb
+C:\Users\c23joseph.daniel\OneDrive - afacademy.af.edu\Desktop\pex3SemanticAnalyzer-main\bin\Debug\ConsoleApplication.exe.config
+C:\Users\c23joseph.daniel\OneDrive - afacademy.af.edu\Desktop\pex3SemanticAnalyzer-main\bin\Debug\ConsoleApplication.exe
+C:\Users\c23joseph.daniel\OneDrive - afacademy.af.edu\Desktop\pex3SemanticAnalyzer-main\bin\Debug\ConsoleApplication.pdb
+C:\Users\c23joseph.daniel\OneDrive - afacademy.af.edu\Desktop\pex3SemanticAnalyzer-main\obj\x86\Debug\pex3SA.csproj.AssemblyReference.cache
+C:\Users\c23joseph.daniel\OneDrive - afacademy.af.edu\Desktop\pex3SemanticAnalyzer-main\obj\x86\Debug\pex3SA.csproj.SuggestedBindingRedirects.cache
+C:\Users\c23joseph.daniel\OneDrive - afacademy.af.edu\Desktop\pex3SemanticAnalyzer-main\obj\x86\Debug\pex3SA.csproj.CoreCompileInputs.cache
+C:\Users\c23joseph.daniel\OneDrive - afacademy.af.edu\Desktop\pex3SemanticAnalyzer-main\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\c23joseph.daniel\OneDrive - afacademy.af.edu\Desktop\pex3SemanticAnalyzer-main\obj\x86\Debug\ConsoleApplication.pdb

@@ -567,7 +567,8 @@
     <Content Include="testcases\pex2\main1.txt" />
     <Content Include="testcases\pex2\while1.txt" />
     <Content Include="testcases\pex2\while2.txt" />
-    <Content Include="testcases\pex3\testProgram1.txt" />
+    <Content Include="testcases\pex3\y_is_not_declared.txt" />
+    <Content Include="testcases\pex3\x_already_declared.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".vs\parserPex\FileContentIndex\merges\" />

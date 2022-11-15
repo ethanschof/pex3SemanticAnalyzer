@@ -444,10 +444,100 @@ namespace CS426.analysis
         }
 
         // ----------------------------------------------------------------
+        // LesserEQ ADDED BY JD, CHECK
+        // ----------------------------------------------------------------
+        public override void OutALesseqExpression4(ALesseqExpression4 node)
+        {
+            Definition expressionMath1Def;
+            Definition expression4Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath1(), out expressionMath1Def))
+            {
+                // Problem occured lower on the tree
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpression4(), out expression4Def))
+            {
+                // Problem occured lower on the tree
+            }
+            else if ((expressionMath1Def.GetType() != expression4Def.GetType()))
+            {
+                PrintWarning(node.GetLessEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
+            }
+            else if (!(expressionMath1Def is IntegerDefinition))
+            {
+                PrintWarning(node.GetLessEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
+            }
+            else
+            {
+                decoratedParseTree.Add(node, new BooleanDefinition());
+            }
+        }
+
+        // ----------------------------------------------------------------
+        // GreatThan ADDED BY JD, CHECK
+        // ----------------------------------------------------------------
+        public override void OutAGreatthanExpression4(AGreatthanExpression4 node)
+        {
+            Definition expressionMath1Def;
+            Definition expression4Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath1(), out expressionMath1Def))
+            {
+                // Problem occured lower on the tree
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpression4(), out expression4Def))
+            {
+                // Problem occured lower on the tree
+            }
+            else if ((expressionMath1Def.GetType() != expression4Def.GetType()))
+            {
+                PrintWarning(node.GetGreaterThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
+            }
+            else if (!(expressionMath1Def is IntegerDefinition))
+            {
+                PrintWarning(node.GetGreaterThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
+            }
+            else
+            {
+                decoratedParseTree.Add(node, new BooleanDefinition());
+            }
+        }
+
+        // ----------------------------------------------------------------
+        // LessThan ADDED BY JD, CHECK
+        // ----------------------------------------------------------------
+        public override void OutALessthanExpression4(ALessthanExpression4 node)
+        {
+            Definition expressionMath1Def;
+            Definition expression4Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpressionMath1(), out expressionMath1Def))
+            {
+                // Problem occured lower on the tree
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpression4(), out expression4Def))
+            {
+                // Problem occured lower on the tree
+            }
+            else if ((expressionMath1Def.GetType() != expression4Def.GetType()))
+            {
+                PrintWarning(node.GetLessThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
+            }
+            else if (!(expressionMath1Def is IntegerDefinition))
+            {
+                PrintWarning(node.GetLessThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
+            }
+            else
+            {
+                decoratedParseTree.Add(node, new BooleanDefinition());
+            }
+        }
+
+        // ----------------------------------------------------------------
         // while_statement
         // ----------------------------------------------------------------
 
-            // TODO
+        // TODO
 
         // ----------------------------------------------------------------
         // if_statement TODO
