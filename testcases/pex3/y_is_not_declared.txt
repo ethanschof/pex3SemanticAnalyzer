@@ -1,0 +1,8 @@
+﻿main {
+
+int x = 5;
+int z;
+
+x + y = z;
+
+}

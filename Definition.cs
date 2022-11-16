@@ -30,7 +30,5 @@ namespace CS426.analysis
     {
         public List<VariableDefinition> parameters;
     }
-
-
 }
 
