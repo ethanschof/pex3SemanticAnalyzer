@@ -1,0 +1,15 @@
+﻿main {
+
+	int x;
+	float y;
+	float z;
+
+	x = 1;
+	y = 2.0;
+	z = 3.3;
+
+	if(x >= y AND y <= z) {
+		x = x + 1;
+	}
+
+}

@@ -1,0 +1,13 @@
+﻿main {
+
+	int x;
+	string randomString;
+
+	x = 1;
+	randomString = "random";
+
+	if(x == randomString) {
+		x = x + 1;
+	}
+
+}

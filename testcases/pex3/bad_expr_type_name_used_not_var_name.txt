@@ -1,0 +1,7 @@
+﻿main {
+
+string int;
+
+int = "test string";
+
+}

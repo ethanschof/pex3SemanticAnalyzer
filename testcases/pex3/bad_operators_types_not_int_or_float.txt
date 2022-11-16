@@ -1,0 +1,12 @@
+﻿main {
+
+	int x;
+	string string1;
+	int z;
+
+	x = 1;
+	string1 = "Get rekt";
+
+	z = x / string1;
+
+}
