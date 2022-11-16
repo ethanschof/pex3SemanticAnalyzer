@@ -460,6 +460,317 @@ Correct 4: Proper AND OR NOT
      `- }
 
  
+Correct 5: Proper Function and Constant 
+
+- AProgram
+     |- AMultipleConstantsConstants
+     |  `- AConstantDeclareConstant
+     |  |  |- def
+     |  |  |- int
+     |  |  |- myConstant
+     |  |  |- =
+     |  |  |- APassExpression
+     |  |  |  `- APassExpression2
+     |  |  |     `- APassExpression3
+     |  |  |        `- APassExpression4
+     |  |  |           `- APassExpressionMath1
+     |  |  |              `- APassExpressionMath2
+     |  |  |                 `- APassExpressionMath3
+     |  |  |                    `- APassExpressionMath4
+     |  |  |                       `- AIntOperand
+     |  |  |                          `- 5
+     |  |  `- ;
+     |  `- ANoConstantsConstants
+     |- AMultipleFunctionsFunctions
+     |  `- AFunction
+     |  |  |- func
+     |  |  |- foo
+     |  |  |- (
+     |  |  |- AManyParams
+     |  |  |  |- AOneParamParam
+     |  |  |  |  |- int
+     |  |  |  |  `- x
+     |  |  |  |- ,
+     |  |  |  `- AManyParams
+     |  |  |     |- AOneParamParam
+     |  |  |     |  |- int
+     |  |  |     |  `- y
+     |  |  |     `- ,
+     |  |  |     `- AOneParams
+     |  |  |        `- ANoParamParam
+     |  |  |- )
+     |  |  |- {
+     |  |  |- AMultipleStatements
+     |  |  |  |- ADeclarationStatement
+     |  |  |  |  `- ADeclareStatement
+     |  |  |  |     |- int
+     |  |  |  |     |- x
+     |  |  |  |     `- ;
+     |  |  |  `- AMultipleStatements
+     |  |  |     |- ADeclarationStatement
+     |  |  |     |  `- ADeclareStatement
+     |  |  |     |     |- int
+     |  |  |     |     |- y
+     |  |  |     |     `- ;
+     |  |  |     `- AMultipleStatements
+     |  |  |        |- ADeclarationStatement
+     |  |  |        |  `- ADeclareStatement
+     |  |  |        |     |- int
+     |  |  |        |     |- z
+     |  |  |        |     `- ;
+     |  |  |        `- AMultipleStatements
+     |  |  |           |- AAssignmentStatement
+     |  |  |           |  `- AAssignStatement
+     |  |  |           |     |- x
+     |  |  |           |     |- =
+     |  |  |           |     |- APassExpression
+     |  |  |           |     |  `- APassExpression2
+     |  |  |           |     |     `- APassExpression3
+     |  |  |           |     |        `- APassExpression4
+     |  |  |           |     |           `- APassExpressionMath1
+     |  |  |           |     |              `- APassExpressionMath2
+     |  |  |           |     |                 `- APassExpressionMath3
+     |  |  |           |     |                    `- APassExpressionMath4
+     |  |  |           |     |                       `- AIntOperand
+     |  |  |           |     |                          `- 1
+     |  |  |           |     `- ;
+     |  |  |           `- AMultipleStatements
+     |  |  |              |- AAssignmentStatement
+     |  |  |              |  `- AAssignStatement
+     |  |  |              |     |- y
+     |  |  |              |     |- =
+     |  |  |              |     |- APassExpression
+     |  |  |              |     |  `- APassExpression2
+     |  |  |              |     |     `- APassExpression3
+     |  |  |              |     |        `- APassExpression4
+     |  |  |              |     |           `- APassExpressionMath1
+     |  |  |              |     |              `- APassExpressionMath2
+     |  |  |              |     |                 `- APassExpressionMath3
+     |  |  |              |     |                    `- APassExpressionMath4
+     |  |  |              |     |                       `- AIntOperand
+     |  |  |              |     |                          `- 2
+     |  |  |              |     `- ;
+     |  |  |              `- AMultipleStatements
+     |  |  |                 `- AAssignmentStatement
+     |  |  |                 |  `- AAssignStatement
+     |  |  |                 |     |- z
+     |  |  |                 |     |- =
+     |  |  |                 |     |- APassExpression
+     |  |  |                 |     |  `- APassExpression2
+     |  |  |                 |     |     `- APassExpression3
+     |  |  |                 |     |        `- APassExpression4
+     |  |  |                 |     |           `- ASubtractExpressionMath1
+     |  |  |                 |     |              |- APassExpressionMath1
+     |  |  |                 |     |              |  `- APassExpressionMath2
+     |  |  |                 |     |              |     `- APassExpressionMath3
+     |  |  |                 |     |              |        `- APassExpressionMath4
+     |  |  |                 |     |              |           `- AVariableOperand
+     |  |  |                 |     |              |              `- x
+     |  |  |                 |     |              |- -
+     |  |  |                 |     |              `- APassExpressionMath2
+     |  |  |                 |     |                 `- APassExpressionMath3
+     |  |  |                 |     |                    `- APassExpressionMath4
+     |  |  |                 |     |                       `- AVariableOperand
+     |  |  |                 |     |                          `- y
+     |  |  |                 |     `- ;
+     |  |  |                 `- ANoStatementsStatements
+     |  |  `- }
+     |  `- ANoFunctionsFunctions
+     |- main
+     |- {
+     |- AMultipleStatements
+     |  |- ADeclarationStatement
+     |  |  `- ADeclareStatement
+     |  |     |- int
+     |  |     |- a
+     |  |     `- ;
+     |  `- AMultipleStatements
+     |     |- ADeclarationStatement
+     |     |  `- ADeclareStatement
+     |     |     |- int
+     |     |     |- b
+     |     |     `- ;
+     |     `- AMultipleStatements
+     |        |- ADeclarationStatement
+     |        |  `- ADeclareStatement
+     |        |     |- int
+     |        |     |- c
+     |        |     `- ;
+     |        `- AMultipleStatements
+     |           |- AAssignmentStatement
+     |           |  `- AAssignStatement
+     |           |     |- a
+     |           |     |- =
+     |           |     |- APassExpression
+     |           |     |  `- APassExpression2
+     |           |     |     `- APassExpression3
+     |           |     |        `- APassExpression4
+     |           |     |           `- APassExpressionMath1
+     |           |     |              `- APassExpressionMath2
+     |           |     |                 `- APassExpressionMath3
+     |           |     |                    `- APassExpressionMath4
+     |           |     |                       `- AIntOperand
+     |           |     |                          `- 1
+     |           |     `- ;
+     |           `- AMultipleStatements
+     |              |- AAssignmentStatement
+     |              |  `- AAssignStatement
+     |              |     |- b
+     |              |     |- =
+     |              |     |- APassExpression
+     |              |     |  `- APassExpression2
+     |              |     |     `- APassExpression3
+     |              |     |        `- APassExpression4
+     |              |     |           `- APassExpressionMath1
+     |              |     |              `- APassExpressionMath2
+     |              |     |                 `- APassExpressionMath3
+     |              |     |                    `- APassExpressionMath4
+     |              |     |                       `- AIntOperand
+     |              |     |                          `- 2
+     |              |     `- ;
+     |              `- AMultipleStatements
+     |                 |- AAssignmentStatement
+     |                 |  `- AAssignStatement
+     |                 |     |- c
+     |                 |     |- =
+     |                 |     |- APassExpression
+     |                 |     |  `- APassExpression2
+     |                 |     |     `- APassExpression3
+     |                 |     |        `- APassExpression4
+     |                 |     |           `- APassExpressionMath1
+     |                 |     |              `- APassExpressionMath2
+     |                 |     |                 `- APassExpressionMath3
+     |                 |     |                    `- APassExpressionMath4
+     |                 |     |                       `- AIntOperand
+     |                 |     |                          `- 3
+     |                 |     `- ;
+     |                 `- AMultipleStatements
+     |                    `- AIfstateStatement
+     |                    |  `- AJustifIfStatement
+     |                    |     |- if
+     |                    |     |- (
+     |                    |     |- ABitorExpression
+     |                    |     |  |- APassExpression
+     |                    |     |  |  `- ABitandExpression2
+     |                    |     |  |     |- APassExpression2
+     |                    |     |  |     |  `- APassExpression3
+     |                    |     |  |     |     `- AGreatthanExpression4
+     |                    |     |  |     |        |- APassExpression4
+     |                    |     |  |     |        |  `- APassExpressionMath1
+     |                    |     |  |     |        |     `- APassExpressionMath2
+     |                    |     |  |     |        |        `- APassExpressionMath3
+     |                    |     |  |     |        |           `- APassExpressionMath4
+     |                    |     |  |     |        |              `- AVariableOperand
+     |                    |     |  |     |        |                 `- x
+     |                    |     |  |     |        |- >
+     |                    |     |  |     |        `- APassExpressionMath1
+     |                    |     |  |     |           `- APassExpressionMath2
+     |                    |     |  |     |              `- APassExpressionMath3
+     |                    |     |  |     |                 `- APassExpressionMath4
+     |                    |     |  |     |                    `- AVariableOperand
+     |                    |     |  |     |                       `- y
+     |                    |     |  |     |- AND
+     |                    |     |  |     `- ANotequivalentExpression3
+     |                    |     |  |        |- APassExpression3
+     |                    |     |  |        |  `- APassExpression4
+     |                    |     |  |        |     `- APassExpressionMath1
+     |                    |     |  |        |        `- APassExpressionMath2
+     |                    |     |  |        |           `- APassExpressionMath3
+     |                    |     |  |        |              `- APassExpressionMath4
+     |                    |     |  |        |                 `- AVariableOperand
+     |                    |     |  |        |                    `- y
+     |                    |     |  |        |- !=
+     |                    |     |  |        `- APassExpression4
+     |                    |     |  |           `- APassExpressionMath1
+     |                    |     |  |              `- APassExpressionMath2
+     |                    |     |  |                 `- APassExpressionMath3
+     |                    |     |  |                    `- APassExpressionMath4
+     |                    |     |  |                       `- AVariableOperand
+     |                    |     |  |                          `- z
+     |                    |     |  |- OR
+     |                    |     |  `- APassExpression2
+     |                    |     |     `- APassExpression3
+     |                    |     |        `- AGreateqExpression4
+     |                    |     |           |- APassExpression4
+     |                    |     |           |  `- APassExpressionMath1
+     |                    |     |           |     `- APassExpressionMath2
+     |                    |     |           |        `- APassExpressionMath3
+     |                    |     |           |           `- APassExpressionMath4
+     |                    |     |           |              `- AVariableOperand
+     |                    |     |           |                 `- z
+     |                    |     |           |- >=
+     |                    |     |           `- APassExpressionMath1
+     |                    |     |              `- APassExpressionMath2
+     |                    |     |                 `- APassExpressionMath3
+     |                    |     |                    `- APassExpressionMath4
+     |                    |     |                       `- AVariableOperand
+     |                    |     |                          `- x
+     |                    |     |- )
+     |                    |     |- {
+     |                    |     |- AMultipleStatements
+     |                    |     |  |- AAssignmentStatement
+     |                    |     |  |  `- AAssignStatement
+     |                    |     |  |     |- x
+     |                    |     |  |     |- =
+     |                    |     |  |     |- APassExpression
+     |                    |     |  |     |  `- APassExpression2
+     |                    |     |  |     |     `- APassExpression3
+     |                    |     |  |     |        `- APassExpression4
+     |                    |     |  |     |           `- AAddExpressionMath1
+     |                    |     |  |     |              |- APassExpressionMath1
+     |                    |     |  |     |              |  `- APassExpressionMath2
+     |                    |     |  |     |              |     `- APassExpressionMath3
+     |                    |     |  |     |              |        `- APassExpressionMath4
+     |                    |     |  |     |              |           `- AVariableOperand
+     |                    |     |  |     |              |              `- x
+     |                    |     |  |     |              |- +
+     |                    |     |  |     |              `- APassExpressionMath2
+     |                    |     |  |     |                 `- APassExpressionMath3
+     |                    |     |  |     |                    `- APassExpressionMath4
+     |                    |     |  |     |                       `- AIntOperand
+     |                    |     |  |     |                          `- 1
+     |                    |     |  |     `- ;
+     |                    |     |  `- AMultipleStatements
+     |                    |     |     `- AFuncCallStatement
+     |                    |     |     |  `- AFunctionCallStatement
+     |                    |     |     |     |- foo
+     |                    |     |     |     |- (
+     |                    |     |     |     |- AManyActualParameters
+     |                    |     |     |     |  |- AActualParamActualParam
+     |                    |     |     |     |  |  `- APassExpression
+     |                    |     |     |     |  |     `- APassExpression2
+     |                    |     |     |     |  |        `- APassExpression3
+     |                    |     |     |     |  |           `- APassExpression4
+     |                    |     |     |     |  |              `- APassExpressionMath1
+     |                    |     |     |     |  |                 `- APassExpressionMath2
+     |                    |     |     |     |  |                    `- APassExpressionMath3
+     |                    |     |     |     |  |                       `- APassExpressionMath4
+     |                    |     |     |     |  |                          `- AVariableOperand
+     |                    |     |     |     |  |                             `- a
+     |                    |     |     |     |  |- ,
+     |                    |     |     |     |  `- AManyActualParameters
+     |                    |     |     |     |     |- AActualParamActualParam
+     |                    |     |     |     |     |  `- APassExpression
+     |                    |     |     |     |     |     `- APassExpression2
+     |                    |     |     |     |     |        `- APassExpression3
+     |                    |     |     |     |     |           `- APassExpression4
+     |                    |     |     |     |     |              `- APassExpressionMath1
+     |                    |     |     |     |     |                 `- APassExpressionMath2
+     |                    |     |     |     |     |                    `- APassExpressionMath3
+     |                    |     |     |     |     |                       `- APassExpressionMath4
+     |                    |     |     |     |     |                          `- AVariableOperand
+     |                    |     |     |     |     |                             `- b
+     |                    |     |     |     |     `- ,
+     |                    |     |     |     |     `- ASingleActualParameters
+     |                    |     |     |     |        `- ANoActualParamActualParam
+     |                    |     |     |     |- )
+     |                    |     |     |     `- ;
+     |                    |     |     `- ANoStatementsStatements
+     |                    |     `- }
+     |                    `- ANoStatementsStatements
+     `- }
+
+ 
 Running Incorrect Test Cases 
 Incorrect 1: y x; – fails if x already declared 
 Error on line 6:5 :: ID already declared in local symbol table
@@ -502,7 +813,7 @@ Error on line 6:5 :: ID already declared in local symbol table
 
  
 Incorrect 2: y x; – fails if y is not declared 
-Error on line 6:1 :: Identifier y does not exist
+Error on line 6:1 :: Identifier y does not exist in local symbol table
 
 - AProgram
      `- ANoConstantsConstants
@@ -553,7 +864,7 @@ Error on line 6:1 :: Identifier y does not exist
  
 Incorrect 3: y x; – fails if y is declared, but not a type 
 Error on line 4:1 :: Type y does not exist
-Error on line 7:1 :: Identifier y does not exist
+Error on line 7:1 :: Identifier y does not exist in local symbol table
 
 - AProgram
      `- ANoConstantsConstants
@@ -764,7 +1075,7 @@ Error on line 8:9 :: y not found
  
 Incorrect 6: final y x=z; - fails if y is declared, but not a type 
 Error on line 4:1 :: Type y does not exist
-Error on line 8:1 :: Identifier y does not exist
+Error on line 8:1 :: Identifier y does not exist in local symbol table
 Error on line 10:9 :: y not found
 
 - AProgram
@@ -1132,7 +1443,7 @@ Error on line 9:2 :: Conditional is not in boolean form
  
 Incorrect 10: Expressions: - fails if type name used instead of variable name 
 Error on line 3:8 :: ID already declared in global symbol table
-Error on line 5:1 :: Identifier int does not exist
+Error on line 5:1 :: Identifier int does not exist in local symbol table
 
 - AProgram
      `- ANoConstantsConstants
@@ -1166,7 +1477,7 @@ Error on line 5:1 :: Identifier int does not exist
 
  
 Incorrect 11: Expressions: - fails if undeclared variable used 
-Error on line 3:2 :: Identifier string1 does not exist
+Error on line 3:2 :: Identifier string1 does not exist in local symbol table
 
 - AProgram
      `- ANoConstantsConstants
@@ -1853,7 +2164,7 @@ Error on line 9:7 :: Cannot compare int with string
 
  
 Incorrect 18: Assignment: x:=y fails when x is not declared 
-Error on line 3:2 :: Identifier x does not exist
+Error on line 3:2 :: Identifier x does not exist in local symbol table
 
 - AProgram
      `- ANoConstantsConstants
@@ -1881,10 +2192,98 @@ Error on line 3:2 :: Identifier x does not exist
 
  
 Incorrect 19: Assignment: x:=y fails when x is declared, but not a variable 
-[13,9] expecting: ';', 'OR'
+Error on line 13:2 :: Identifier foo does not exist in local symbol table
+
+- AProgram
+     |- ANoConstantsConstants
+     |- AMultipleFunctionsFunctions
+     |  `- AFunction
+     |  |  |- func
+     |  |  |- foo
+     |  |  |- (
+     |  |  |- AOneParams
+     |  |  |  `- AOneParamParam
+     |  |  |     |- int
+     |  |  |     `- x
+     |  |  |- )
+     |  |  |- {
+     |  |  |- AMultipleStatements
+     |  |  |  |- ADeclarationStatement
+     |  |  |  |  `- ADeclareStatement
+     |  |  |  |     |- string
+     |  |  |  |     |- myName
+     |  |  |  |     `- ;
+     |  |  |  `- AMultipleStatements
+     |  |  |     `- AAssignmentStatement
+     |  |  |     |  `- AAssignStatement
+     |  |  |     |     |- myName
+     |  |  |     |     |- =
+     |  |  |     |     |- APassExpression
+     |  |  |     |     |  `- APassExpression2
+     |  |  |     |     |     `- APassExpression3
+     |  |  |     |     |        `- APassExpression4
+     |  |  |     |     |           `- APassExpressionMath1
+     |  |  |     |     |              `- APassExpressionMath2
+     |  |  |     |     |                 `- APassExpressionMath3
+     |  |  |     |     |                    `- APassExpressionMath4
+     |  |  |     |     |                       `- AStrOperand
+     |  |  |     |     |                          `- "Joseph"
+     |  |  |     |     `- ;
+     |  |  |     `- ANoStatementsStatements
+     |  |  `- }
+     |  `- ANoFunctionsFunctions
+     |- main
+     |- {
+     |- AMultipleStatements
+     |  |- ADeclarationStatement
+     |  |  `- ADeclareStatement
+     |  |     |- int
+     |  |     |- x
+     |  |     `- ;
+     |  `- AMultipleStatements
+     |     |- ADeclarationStatement
+     |     |  `- ADeclareStatement
+     |     |     |- int
+     |     |     |- y
+     |     |     `- ;
+     |     `- AMultipleStatements
+     |        |- AAssignmentStatement
+     |        |  `- AAssignStatement
+     |        |     |- y
+     |        |     |- =
+     |        |     |- APassExpression
+     |        |     |  `- APassExpression2
+     |        |     |     `- APassExpression3
+     |        |     |        `- APassExpression4
+     |        |     |           `- APassExpressionMath1
+     |        |     |              `- APassExpressionMath2
+     |        |     |                 `- APassExpressionMath3
+     |        |     |                    `- APassExpressionMath4
+     |        |     |                       `- AIntOperand
+     |        |     |                          `- 3
+     |        |     `- ;
+     |        `- AMultipleStatements
+     |           `- AAssignmentStatement
+     |           |  `- AAssignStatement
+     |           |     |- foo
+     |           |     |- =
+     |           |     |- APassExpression
+     |           |     |  `- APassExpression2
+     |           |     |     `- APassExpression3
+     |           |     |        `- APassExpression4
+     |           |     |           `- APassExpressionMath1
+     |           |     |              `- APassExpressionMath2
+     |           |     |                 `- APassExpressionMath3
+     |           |     |                    `- APassExpressionMath4
+     |           |     |                       `- AVariableOperand
+     |           |     |                          `- x
+     |           |     `- ;
+     |           `- ANoStatementsStatements
+     `- }
+
  
 Incorrect 20: Assignment: x:=y fails when x is constant 
-Error on line 7:2 :: Identifier x does not exist
+Error on line 7:2 :: Identifier x does not exist in local symbol table
 
 - AProgram
      `- AMultipleConstantsConstants
@@ -2007,5 +2406,1141 @@ Error on line 7:2 :: Types don't match
 
  
 Incorrect 22: Procedures: reports failure when procedure name already used 
-Object reference not set to an instance of an object.
+Error on line 12:6 :: Identifier foo is already being used
+Error on line 13:6 :: ID already declared in local symbol table
+Error on line 14:6 :: ID already declared in local symbol table
+Error on line 15:6 :: ID already declared in local symbol table
+
+- AProgram
+     |- ANoConstantsConstants
+     |- AMultipleFunctionsFunctions
+     |  |- AFunction
+     |  |  |- func
+     |  |  |- foo
+     |  |  `- (
+     |  |  |- AOneParams
+     |  |  |  `- ANoParamParam
+     |  |  |- )
+     |  |  |- {
+     |  |  |- AMultipleStatements
+     |  |  |  |- ADeclarationStatement
+     |  |  |  |  `- ADeclareStatement
+     |  |  |  |     |- int
+     |  |  |  |     |- x
+     |  |  |  |     `- ;
+     |  |  |  `- AMultipleStatements
+     |  |  |     |- ADeclarationStatement
+     |  |  |     |  `- ADeclareStatement
+     |  |  |     |     |- int
+     |  |  |     |     |- y
+     |  |  |     |     `- ;
+     |  |  |     `- AMultipleStatements
+     |  |  |        |- ADeclarationStatement
+     |  |  |        |  `- ADeclareStatement
+     |  |  |        |     |- int
+     |  |  |        |     |- z
+     |  |  |        |     `- ;
+     |  |  |        `- AMultipleStatements
+     |  |  |           |- AAssignmentStatement
+     |  |  |           |  `- AAssignStatement
+     |  |  |           |     |- x
+     |  |  |           |     |- =
+     |  |  |           |     |- APassExpression
+     |  |  |           |     |  `- APassExpression2
+     |  |  |           |     |     `- APassExpression3
+     |  |  |           |     |        `- APassExpression4
+     |  |  |           |     |           `- APassExpressionMath1
+     |  |  |           |     |              `- APassExpressionMath2
+     |  |  |           |     |                 `- APassExpressionMath3
+     |  |  |           |     |                    `- APassExpressionMath4
+     |  |  |           |     |                       `- AIntOperand
+     |  |  |           |     |                          `- 1
+     |  |  |           |     `- ;
+     |  |  |           `- AMultipleStatements
+     |  |  |              |- AAssignmentStatement
+     |  |  |              |  `- AAssignStatement
+     |  |  |              |     |- y
+     |  |  |              |     |- =
+     |  |  |              |     |- APassExpression
+     |  |  |              |     |  `- APassExpression2
+     |  |  |              |     |     `- APassExpression3
+     |  |  |              |     |        `- APassExpression4
+     |  |  |              |     |           `- APassExpressionMath1
+     |  |  |              |     |              `- APassExpressionMath2
+     |  |  |              |     |                 `- APassExpressionMath3
+     |  |  |              |     |                    `- APassExpressionMath4
+     |  |  |              |     |                       `- AIntOperand
+     |  |  |              |     |                          `- 2
+     |  |  |              |     `- ;
+     |  |  |              `- AMultipleStatements
+     |  |  |                 `- AAssignmentStatement
+     |  |  |                 |  `- AAssignStatement
+     |  |  |                 |     |- z
+     |  |  |                 |     |- =
+     |  |  |                 |     |- APassExpression
+     |  |  |                 |     |  `- APassExpression2
+     |  |  |                 |     |     `- APassExpression3
+     |  |  |                 |     |        `- APassExpression4
+     |  |  |                 |     |           `- APassExpressionMath1
+     |  |  |                 |     |              `- AMultiplyExpressionMath2
+     |  |  |                 |     |                 |- APassExpressionMath2
+     |  |  |                 |     |                 |  `- APassExpressionMath3
+     |  |  |                 |     |                 |     `- APassExpressionMath4
+     |  |  |                 |     |                 |        `- AVariableOperand
+     |  |  |                 |     |                 |           `- x
+     |  |  |                 |     |                 |- *
+     |  |  |                 |     |                 `- APassExpressionMath3
+     |  |  |                 |     |                    `- APassExpressionMath4
+     |  |  |                 |     |                       `- AVariableOperand
+     |  |  |                 |     |                          `- y
+     |  |  |                 |     `- ;
+     |  |  |                 `- ANoStatementsStatements
+     |  |  `- }
+     |  `- AMultipleFunctionsFunctions
+     |     `- AFunction
+     |     |  |- func
+     |     |  |- foo
+     |     |  `- (
+     |     |  |- AOneParams
+     |     |  |  `- ANoParamParam
+     |     |  |- )
+     |     |  |- {
+     |     |  |- AMultipleStatements
+     |     |  |  |- ADeclarationStatement
+     |     |  |  |  `- ADeclareStatement
+     |     |  |  |     |- int
+     |     |  |  |     |- x
+     |     |  |  |     `- ;
+     |     |  |  `- AMultipleStatements
+     |     |  |     |- ADeclarationStatement
+     |     |  |     |  `- ADeclareStatement
+     |     |  |     |     |- int
+     |     |  |     |     |- y
+     |     |  |     |     `- ;
+     |     |  |     `- AMultipleStatements
+     |     |  |        |- ADeclarationStatement
+     |     |  |        |  `- ADeclareStatement
+     |     |  |        |     |- int
+     |     |  |        |     |- z
+     |     |  |        |     `- ;
+     |     |  |        `- AMultipleStatements
+     |     |  |           |- AAssignmentStatement
+     |     |  |           |  `- AAssignStatement
+     |     |  |           |     |- x
+     |     |  |           |     |- =
+     |     |  |           |     |- APassExpression
+     |     |  |           |     |  `- APassExpression2
+     |     |  |           |     |     `- APassExpression3
+     |     |  |           |     |        `- APassExpression4
+     |     |  |           |     |           `- APassExpressionMath1
+     |     |  |           |     |              `- APassExpressionMath2
+     |     |  |           |     |                 `- APassExpressionMath3
+     |     |  |           |     |                    `- APassExpressionMath4
+     |     |  |           |     |                       `- AIntOperand
+     |     |  |           |     |                          `- 1
+     |     |  |           |     `- ;
+     |     |  |           `- AMultipleStatements
+     |     |  |              |- AAssignmentStatement
+     |     |  |              |  `- AAssignStatement
+     |     |  |              |     |- y
+     |     |  |              |     |- =
+     |     |  |              |     |- APassExpression
+     |     |  |              |     |  `- APassExpression2
+     |     |  |              |     |     `- APassExpression3
+     |     |  |              |     |        `- APassExpression4
+     |     |  |              |     |           `- APassExpressionMath1
+     |     |  |              |     |              `- APassExpressionMath2
+     |     |  |              |     |                 `- APassExpressionMath3
+     |     |  |              |     |                    `- APassExpressionMath4
+     |     |  |              |     |                       `- AIntOperand
+     |     |  |              |     |                          `- 2
+     |     |  |              |     `- ;
+     |     |  |              `- AMultipleStatements
+     |     |  |                 `- AAssignmentStatement
+     |     |  |                 |  `- AAssignStatement
+     |     |  |                 |     |- z
+     |     |  |                 |     |- =
+     |     |  |                 |     |- APassExpression
+     |     |  |                 |     |  `- APassExpression2
+     |     |  |                 |     |     `- APassExpression3
+     |     |  |                 |     |        `- APassExpression4
+     |     |  |                 |     |           `- APassExpressionMath1
+     |     |  |                 |     |              `- AMultiplyExpressionMath2
+     |     |  |                 |     |                 |- APassExpressionMath2
+     |     |  |                 |     |                 |  `- APassExpressionMath3
+     |     |  |                 |     |                 |     `- APassExpressionMath4
+     |     |  |                 |     |                 |        `- AVariableOperand
+     |     |  |                 |     |                 |           `- x
+     |     |  |                 |     |                 |- *
+     |     |  |                 |     |                 `- APassExpressionMath3
+     |     |  |                 |     |                    `- APassExpressionMath4
+     |     |  |                 |     |                       `- AVariableOperand
+     |     |  |                 |     |                          `- y
+     |     |  |                 |     `- ;
+     |     |  |                 `- ANoStatementsStatements
+     |     |  `- }
+     |     `- ANoFunctionsFunctions
+     |- main
+     |- {
+     |- AMultipleStatements
+     |  |- AFuncCallStatement
+     |  |  `- AFunctionCallStatement
+     |  |     |- foo
+     |  |     `- (
+     |  |     |- ASingleActualParameters
+     |  |     |  `- ANoActualParamActualParam
+     |  |     |- )
+     |  |     `- ;
+     |  `- AMultipleStatements
+     |     `- AFuncCallStatement
+     |     |  `- AFunctionCallStatement
+     |     |     |- foo
+     |     |     `- (
+     |     |     |- ASingleActualParameters
+     |     |     |  `- ANoActualParamActualParam
+     |     |     |- )
+     |     |     `- ;
+     |     `- ANoStatementsStatements
+     `- }
+
+ 
+Incorrect 23: Procedures: reports failure when formal parameter declared incorrectly (e.g. x x) 
+Error on line 1:23 :: Parameter name used more than once
+Error on line 19:2 :: Types do not match between declaration and call
+
+- AProgram
+     |- ANoConstantsConstants
+     |- AMultipleFunctionsFunctions
+     |  `- AFunction
+     |  |  |- func
+     |  |  |- foo
+     |  |  |- (
+     |  |  |- AManyParams
+     |  |  |  |- AOneParamParam
+     |  |  |  |  |- int
+     |  |  |  |  `- x
+     |  |  |  |- ,
+     |  |  |  `- AManyParams
+     |  |  |     |- AOneParamParam
+     |  |  |     |  |- float
+     |  |  |     |  `- x
+     |  |  |     `- ,
+     |  |  |     `- AOneParams
+     |  |  |        `- ANoParamParam
+     |  |  |- )
+     |  |  |- {
+     |  |  |- AMultipleStatements
+     |  |  |  |- ADeclarationStatement
+     |  |  |  |  `- ADeclareStatement
+     |  |  |  |     |- int
+     |  |  |  |     |- x
+     |  |  |  |     `- ;
+     |  |  |  `- AMultipleStatements
+     |  |  |     |- ADeclarationStatement
+     |  |  |     |  `- ADeclareStatement
+     |  |  |     |     |- int
+     |  |  |     |     |- y
+     |  |  |     |     `- ;
+     |  |  |     `- AMultipleStatements
+     |  |  |        |- ADeclarationStatement
+     |  |  |        |  `- ADeclareStatement
+     |  |  |        |     |- int
+     |  |  |        |     |- z
+     |  |  |        |     `- ;
+     |  |  |        `- AMultipleStatements
+     |  |  |           |- AAssignmentStatement
+     |  |  |           |  `- AAssignStatement
+     |  |  |           |     |- x
+     |  |  |           |     |- =
+     |  |  |           |     |- APassExpression
+     |  |  |           |     |  `- APassExpression2
+     |  |  |           |     |     `- APassExpression3
+     |  |  |           |     |        `- APassExpression4
+     |  |  |           |     |           `- APassExpressionMath1
+     |  |  |           |     |              `- APassExpressionMath2
+     |  |  |           |     |                 `- APassExpressionMath3
+     |  |  |           |     |                    `- APassExpressionMath4
+     |  |  |           |     |                       `- AIntOperand
+     |  |  |           |     |                          `- 1
+     |  |  |           |     `- ;
+     |  |  |           `- AMultipleStatements
+     |  |  |              |- AAssignmentStatement
+     |  |  |              |  `- AAssignStatement
+     |  |  |              |     |- y
+     |  |  |              |     |- =
+     |  |  |              |     |- APassExpression
+     |  |  |              |     |  `- APassExpression2
+     |  |  |              |     |     `- APassExpression3
+     |  |  |              |     |        `- APassExpression4
+     |  |  |              |     |           `- APassExpressionMath1
+     |  |  |              |     |              `- APassExpressionMath2
+     |  |  |              |     |                 `- APassExpressionMath3
+     |  |  |              |     |                    `- APassExpressionMath4
+     |  |  |              |     |                       `- AIntOperand
+     |  |  |              |     |                          `- 2
+     |  |  |              |     `- ;
+     |  |  |              `- AMultipleStatements
+     |  |  |                 `- AAssignmentStatement
+     |  |  |                 |  `- AAssignStatement
+     |  |  |                 |     |- z
+     |  |  |                 |     |- =
+     |  |  |                 |     |- APassExpression
+     |  |  |                 |     |  `- APassExpression2
+     |  |  |                 |     |     `- APassExpression3
+     |  |  |                 |     |        `- APassExpression4
+     |  |  |                 |     |           `- APassExpressionMath1
+     |  |  |                 |     |              `- AMultiplyExpressionMath2
+     |  |  |                 |     |                 |- APassExpressionMath2
+     |  |  |                 |     |                 |  `- APassExpressionMath3
+     |  |  |                 |     |                 |     `- APassExpressionMath4
+     |  |  |                 |     |                 |        `- AVariableOperand
+     |  |  |                 |     |                 |           `- x
+     |  |  |                 |     |                 |- *
+     |  |  |                 |     |                 `- APassExpressionMath3
+     |  |  |                 |     |                    `- APassExpressionMath4
+     |  |  |                 |     |                       `- AVariableOperand
+     |  |  |                 |     |                          `- y
+     |  |  |                 |     `- ;
+     |  |  |                 `- ANoStatementsStatements
+     |  |  `- }
+     |  `- ANoFunctionsFunctions
+     |- main
+     |- {
+     |- AMultipleStatements
+     |  |- ADeclarationStatement
+     |  |  `- ADeclareStatement
+     |  |     |- int
+     |  |     |- x1
+     |  |     `- ;
+     |  `- AMultipleStatements
+     |     |- ADeclarationStatement
+     |     |  `- ADeclareStatement
+     |     |     |- int
+     |     |     |- x2
+     |     |     `- ;
+     |     `- AMultipleStatements
+     |        |- AAssignmentStatement
+     |        |  `- AAssignStatement
+     |        |     |- x1
+     |        |     |- =
+     |        |     |- APassExpression
+     |        |     |  `- APassExpression2
+     |        |     |     `- APassExpression3
+     |        |     |        `- APassExpression4
+     |        |     |           `- APassExpressionMath1
+     |        |     |              `- APassExpressionMath2
+     |        |     |                 `- APassExpressionMath3
+     |        |     |                    `- APassExpressionMath4
+     |        |     |                       `- AIntOperand
+     |        |     |                          `- 3
+     |        |     `- ;
+     |        `- AMultipleStatements
+     |           |- AAssignmentStatement
+     |           |  `- AAssignStatement
+     |           |     |- x2
+     |           |     |- =
+     |           |     |- APassExpression
+     |           |     |  `- APassExpression2
+     |           |     |     `- APassExpression3
+     |           |     |        `- APassExpression4
+     |           |     |           `- APassExpressionMath1
+     |           |     |              `- APassExpressionMath2
+     |           |     |                 `- APassExpressionMath3
+     |           |     |                    `- APassExpressionMath4
+     |           |     |                       `- AIntOperand
+     |           |     |                          `- 5
+     |           |     `- ;
+     |           `- AMultipleStatements
+     |              `- AFuncCallStatement
+     |              |  `- AFunctionCallStatement
+     |              |     |- foo
+     |              |     |- (
+     |              |     |- AManyActualParameters
+     |              |     |  |- AActualParamActualParam
+     |              |     |  |  `- APassExpression
+     |              |     |  |     `- APassExpression2
+     |              |     |  |        `- APassExpression3
+     |              |     |  |           `- APassExpression4
+     |              |     |  |              `- APassExpressionMath1
+     |              |     |  |                 `- APassExpressionMath2
+     |              |     |  |                    `- APassExpressionMath3
+     |              |     |  |                       `- APassExpressionMath4
+     |              |     |  |                          `- AVariableOperand
+     |              |     |  |                             `- x1
+     |              |     |  |- ,
+     |              |     |  `- AManyActualParameters
+     |              |     |     |- AActualParamActualParam
+     |              |     |     |  `- APassExpression
+     |              |     |     |     `- APassExpression2
+     |              |     |     |        `- APassExpression3
+     |              |     |     |           `- APassExpression4
+     |              |     |     |              `- APassExpressionMath1
+     |              |     |     |                 `- APassExpressionMath2
+     |              |     |     |                    `- APassExpressionMath3
+     |              |     |     |                       `- APassExpressionMath4
+     |              |     |     |                          `- AVariableOperand
+     |              |     |     |                             `- x2
+     |              |     |     `- ,
+     |              |     |     `- ASingleActualParameters
+     |              |     |        `- ANoActualParamActualParam
+     |              |     |- )
+     |              |     `- ;
+     |              `- ANoStatementsStatements
+     `- }
+
+ 
+Incorrect 24: Procedures: reports failure when formal parameter declared twice (e.g. int x, int x) 
+Error on line 1:21 :: Parameter name used more than once
+
+- AProgram
+     |- ANoConstantsConstants
+     |- AMultipleFunctionsFunctions
+     |  `- AFunction
+     |  |  |- func
+     |  |  |- foo
+     |  |  |- (
+     |  |  |- AManyParams
+     |  |  |  |- AOneParamParam
+     |  |  |  |  |- int
+     |  |  |  |  `- x
+     |  |  |  |- ,
+     |  |  |  `- AManyParams
+     |  |  |     |- AOneParamParam
+     |  |  |     |  |- int
+     |  |  |     |  `- x
+     |  |  |     `- ,
+     |  |  |     `- AOneParams
+     |  |  |        `- ANoParamParam
+     |  |  |- )
+     |  |  |- {
+     |  |  |- AMultipleStatements
+     |  |  |  |- ADeclarationStatement
+     |  |  |  |  `- ADeclareStatement
+     |  |  |  |     |- int
+     |  |  |  |     |- x
+     |  |  |  |     `- ;
+     |  |  |  `- AMultipleStatements
+     |  |  |     |- ADeclarationStatement
+     |  |  |     |  `- ADeclareStatement
+     |  |  |     |     |- int
+     |  |  |     |     |- y
+     |  |  |     |     `- ;
+     |  |  |     `- AMultipleStatements
+     |  |  |        |- ADeclarationStatement
+     |  |  |        |  `- ADeclareStatement
+     |  |  |        |     |- int
+     |  |  |        |     |- z
+     |  |  |        |     `- ;
+     |  |  |        `- AMultipleStatements
+     |  |  |           |- AAssignmentStatement
+     |  |  |           |  `- AAssignStatement
+     |  |  |           |     |- x
+     |  |  |           |     |- =
+     |  |  |           |     |- APassExpression
+     |  |  |           |     |  `- APassExpression2
+     |  |  |           |     |     `- APassExpression3
+     |  |  |           |     |        `- APassExpression4
+     |  |  |           |     |           `- APassExpressionMath1
+     |  |  |           |     |              `- APassExpressionMath2
+     |  |  |           |     |                 `- APassExpressionMath3
+     |  |  |           |     |                    `- APassExpressionMath4
+     |  |  |           |     |                       `- AIntOperand
+     |  |  |           |     |                          `- 1
+     |  |  |           |     `- ;
+     |  |  |           `- AMultipleStatements
+     |  |  |              |- AAssignmentStatement
+     |  |  |              |  `- AAssignStatement
+     |  |  |              |     |- y
+     |  |  |              |     |- =
+     |  |  |              |     |- APassExpression
+     |  |  |              |     |  `- APassExpression2
+     |  |  |              |     |     `- APassExpression3
+     |  |  |              |     |        `- APassExpression4
+     |  |  |              |     |           `- APassExpressionMath1
+     |  |  |              |     |              `- APassExpressionMath2
+     |  |  |              |     |                 `- APassExpressionMath3
+     |  |  |              |     |                    `- APassExpressionMath4
+     |  |  |              |     |                       `- AIntOperand
+     |  |  |              |     |                          `- 2
+     |  |  |              |     `- ;
+     |  |  |              `- AMultipleStatements
+     |  |  |                 `- AAssignmentStatement
+     |  |  |                 |  `- AAssignStatement
+     |  |  |                 |     |- z
+     |  |  |                 |     |- =
+     |  |  |                 |     |- APassExpression
+     |  |  |                 |     |  `- APassExpression2
+     |  |  |                 |     |     `- APassExpression3
+     |  |  |                 |     |        `- APassExpression4
+     |  |  |                 |     |           `- APassExpressionMath1
+     |  |  |                 |     |              `- AMultiplyExpressionMath2
+     |  |  |                 |     |                 |- APassExpressionMath2
+     |  |  |                 |     |                 |  `- APassExpressionMath3
+     |  |  |                 |     |                 |     `- APassExpressionMath4
+     |  |  |                 |     |                 |        `- AVariableOperand
+     |  |  |                 |     |                 |           `- x
+     |  |  |                 |     |                 |- *
+     |  |  |                 |     |                 `- APassExpressionMath3
+     |  |  |                 |     |                    `- APassExpressionMath4
+     |  |  |                 |     |                       `- AVariableOperand
+     |  |  |                 |     |                          `- y
+     |  |  |                 |     `- ;
+     |  |  |                 `- ANoStatementsStatements
+     |  |  `- }
+     |  `- ANoFunctionsFunctions
+     |- main
+     |- {
+     |- AMultipleStatements
+     |  |- ADeclarationStatement
+     |  |  `- ADeclareStatement
+     |  |     |- int
+     |  |     |- x1
+     |  |     `- ;
+     |  `- AMultipleStatements
+     |     |- ADeclarationStatement
+     |     |  `- ADeclareStatement
+     |     |     |- int
+     |     |     |- x2
+     |     |     `- ;
+     |     `- AMultipleStatements
+     |        |- AAssignmentStatement
+     |        |  `- AAssignStatement
+     |        |     |- x1
+     |        |     |- =
+     |        |     |- APassExpression
+     |        |     |  `- APassExpression2
+     |        |     |     `- APassExpression3
+     |        |     |        `- APassExpression4
+     |        |     |           `- APassExpressionMath1
+     |        |     |              `- APassExpressionMath2
+     |        |     |                 `- APassExpressionMath3
+     |        |     |                    `- APassExpressionMath4
+     |        |     |                       `- AIntOperand
+     |        |     |                          `- 3
+     |        |     `- ;
+     |        `- AMultipleStatements
+     |           |- AAssignmentStatement
+     |           |  `- AAssignStatement
+     |           |     |- x2
+     |           |     |- =
+     |           |     |- APassExpression
+     |           |     |  `- APassExpression2
+     |           |     |     `- APassExpression3
+     |           |     |        `- APassExpression4
+     |           |     |           `- APassExpressionMath1
+     |           |     |              `- APassExpressionMath2
+     |           |     |                 `- APassExpressionMath3
+     |           |     |                    `- APassExpressionMath4
+     |           |     |                       `- AIntOperand
+     |           |     |                          `- 5
+     |           |     `- ;
+     |           `- AMultipleStatements
+     |              `- AFuncCallStatement
+     |              |  `- AFunctionCallStatement
+     |              |     |- foo
+     |              |     |- (
+     |              |     |- AManyActualParameters
+     |              |     |  |- AActualParamActualParam
+     |              |     |  |  `- APassExpression
+     |              |     |  |     `- APassExpression2
+     |              |     |  |        `- APassExpression3
+     |              |     |  |           `- APassExpression4
+     |              |     |  |              `- APassExpressionMath1
+     |              |     |  |                 `- APassExpressionMath2
+     |              |     |  |                    `- APassExpressionMath3
+     |              |     |  |                       `- APassExpressionMath4
+     |              |     |  |                          `- AVariableOperand
+     |              |     |  |                             `- x1
+     |              |     |  |- ,
+     |              |     |  `- AManyActualParameters
+     |              |     |     |- AActualParamActualParam
+     |              |     |     |  `- APassExpression
+     |              |     |     |     `- APassExpression2
+     |              |     |     |        `- APassExpression3
+     |              |     |     |           `- APassExpression4
+     |              |     |     |              `- APassExpressionMath1
+     |              |     |     |                 `- APassExpressionMath2
+     |              |     |     |                    `- APassExpressionMath3
+     |              |     |     |                       `- APassExpressionMath4
+     |              |     |     |                          `- AVariableOperand
+     |              |     |     |                             `- x2
+     |              |     |     `- ,
+     |              |     |     `- ASingleActualParameters
+     |              |     |        `- ANoActualParamActualParam
+     |              |     |- )
+     |              |     `- ;
+     |              `- ANoStatementsStatements
+     `- }
+
+ 
+Incorrect 25: x(y,z) : reports failure when x is not declared 
+Error on line 16:2 :: Identifier x2 does not exist in local symbol table
+Error on line 18:10 :: x2 not found
+Error on line 18:2 :: Incorrect number of arguments for function call
+
+- AProgram
+     |- ANoConstantsConstants
+     |- AMultipleFunctionsFunctions
+     |  `- AFunction
+     |  |  |- func
+     |  |  |- foo
+     |  |  |- (
+     |  |  |- AManyParams
+     |  |  |  |- AOneParamParam
+     |  |  |  |  |- int
+     |  |  |  |  `- x
+     |  |  |  |- ,
+     |  |  |  `- AManyParams
+     |  |  |     |- AOneParamParam
+     |  |  |     |  |- int
+     |  |  |     |  `- y
+     |  |  |     `- ,
+     |  |  |     `- AOneParams
+     |  |  |        `- ANoParamParam
+     |  |  |- )
+     |  |  |- {
+     |  |  |- AMultipleStatements
+     |  |  |  |- ADeclarationStatement
+     |  |  |  |  `- ADeclareStatement
+     |  |  |  |     |- int
+     |  |  |  |     |- x
+     |  |  |  |     `- ;
+     |  |  |  `- AMultipleStatements
+     |  |  |     |- ADeclarationStatement
+     |  |  |     |  `- ADeclareStatement
+     |  |  |     |     |- int
+     |  |  |     |     |- y
+     |  |  |     |     `- ;
+     |  |  |     `- AMultipleStatements
+     |  |  |        |- ADeclarationStatement
+     |  |  |        |  `- ADeclareStatement
+     |  |  |        |     |- int
+     |  |  |        |     |- z
+     |  |  |        |     `- ;
+     |  |  |        `- AMultipleStatements
+     |  |  |           |- AAssignmentStatement
+     |  |  |           |  `- AAssignStatement
+     |  |  |           |     |- x
+     |  |  |           |     |- =
+     |  |  |           |     |- APassExpression
+     |  |  |           |     |  `- APassExpression2
+     |  |  |           |     |     `- APassExpression3
+     |  |  |           |     |        `- APassExpression4
+     |  |  |           |     |           `- APassExpressionMath1
+     |  |  |           |     |              `- APassExpressionMath2
+     |  |  |           |     |                 `- APassExpressionMath3
+     |  |  |           |     |                    `- APassExpressionMath4
+     |  |  |           |     |                       `- AIntOperand
+     |  |  |           |     |                          `- 1
+     |  |  |           |     `- ;
+     |  |  |           `- AMultipleStatements
+     |  |  |              |- AAssignmentStatement
+     |  |  |              |  `- AAssignStatement
+     |  |  |              |     |- y
+     |  |  |              |     |- =
+     |  |  |              |     |- APassExpression
+     |  |  |              |     |  `- APassExpression2
+     |  |  |              |     |     `- APassExpression3
+     |  |  |              |     |        `- APassExpression4
+     |  |  |              |     |           `- APassExpressionMath1
+     |  |  |              |     |              `- APassExpressionMath2
+     |  |  |              |     |                 `- APassExpressionMath3
+     |  |  |              |     |                    `- APassExpressionMath4
+     |  |  |              |     |                       `- AIntOperand
+     |  |  |              |     |                          `- 2
+     |  |  |              |     `- ;
+     |  |  |              `- AMultipleStatements
+     |  |  |                 `- AAssignmentStatement
+     |  |  |                 |  `- AAssignStatement
+     |  |  |                 |     |- z
+     |  |  |                 |     |- =
+     |  |  |                 |     |- APassExpression
+     |  |  |                 |     |  `- APassExpression2
+     |  |  |                 |     |     `- APassExpression3
+     |  |  |                 |     |        `- APassExpression4
+     |  |  |                 |     |           `- APassExpressionMath1
+     |  |  |                 |     |              `- AMultiplyExpressionMath2
+     |  |  |                 |     |                 |- APassExpressionMath2
+     |  |  |                 |     |                 |  `- APassExpressionMath3
+     |  |  |                 |     |                 |     `- APassExpressionMath4
+     |  |  |                 |     |                 |        `- AVariableOperand
+     |  |  |                 |     |                 |           `- x
+     |  |  |                 |     |                 |- *
+     |  |  |                 |     |                 `- APassExpressionMath3
+     |  |  |                 |     |                    `- APassExpressionMath4
+     |  |  |                 |     |                       `- AVariableOperand
+     |  |  |                 |     |                          `- y
+     |  |  |                 |     `- ;
+     |  |  |                 `- ANoStatementsStatements
+     |  |  `- }
+     |  `- ANoFunctionsFunctions
+     |- main
+     |- {
+     |- AMultipleStatements
+     |  |- ADeclarationStatement
+     |  |  `- ADeclareStatement
+     |  |     |- int
+     |  |     |- x1
+     |  |     `- ;
+     |  `- AMultipleStatements
+     |     |- AAssignmentStatement
+     |     |  `- AAssignStatement
+     |     |     |- x1
+     |     |     |- =
+     |     |     |- APassExpression
+     |     |     |  `- APassExpression2
+     |     |     |     `- APassExpression3
+     |     |     |        `- APassExpression4
+     |     |     |           `- APassExpressionMath1
+     |     |     |              `- APassExpressionMath2
+     |     |     |                 `- APassExpressionMath3
+     |     |     |                    `- APassExpressionMath4
+     |     |     |                       `- AIntOperand
+     |     |     |                          `- 3
+     |     |     `- ;
+     |     `- AMultipleStatements
+     |        |- AAssignmentStatement
+     |        |  `- AAssignStatement
+     |        |     |- x2
+     |        |     |- =
+     |        |     |- APassExpression
+     |        |     |  `- APassExpression2
+     |        |     |     `- APassExpression3
+     |        |     |        `- APassExpression4
+     |        |     |           `- APassExpressionMath1
+     |        |     |              `- APassExpressionMath2
+     |        |     |                 `- APassExpressionMath3
+     |        |     |                    `- APassExpressionMath4
+     |        |     |                       `- AIntOperand
+     |        |     |                          `- 5
+     |        |     `- ;
+     |        `- AMultipleStatements
+     |           `- AFuncCallStatement
+     |           |  `- AFunctionCallStatement
+     |           |     |- foo
+     |           |     |- (
+     |           |     |- AManyActualParameters
+     |           |     |  |- AActualParamActualParam
+     |           |     |  |  `- APassExpression
+     |           |     |  |     `- APassExpression2
+     |           |     |  |        `- APassExpression3
+     |           |     |  |           `- APassExpression4
+     |           |     |  |              `- APassExpressionMath1
+     |           |     |  |                 `- APassExpressionMath2
+     |           |     |  |                    `- APassExpressionMath3
+     |           |     |  |                       `- APassExpressionMath4
+     |           |     |  |                          `- AVariableOperand
+     |           |     |  |                             `- x1
+     |           |     |  |- ,
+     |           |     |  `- AManyActualParameters
+     |           |     |     |- AActualParamActualParam
+     |           |     |     |  `- APassExpression
+     |           |     |     |     `- APassExpression2
+     |           |     |     |        `- APassExpression3
+     |           |     |     |           `- APassExpression4
+     |           |     |     |              `- APassExpressionMath1
+     |           |     |     |                 `- APassExpressionMath2
+     |           |     |     |                    `- APassExpressionMath3
+     |           |     |     |                       `- APassExpressionMath4
+     |           |     |     |                          `- AVariableOperand
+     |           |     |     |                             `- x2
+     |           |     |     `- ,
+     |           |     |     `- ASingleActualParameters
+     |           |     |        `- ANoActualParamActualParam
+     |           |     |- )
+     |           |     `- ;
+     |           `- ANoStatementsStatements
+     `- }
+
+ 
+Incorrect 26: x(y,z) : reports failure when x is declared, but not a procedure 
+Error on line 21:2 :: Identifier testString was not registered in the global symbol table
+
+- AProgram
+     |- ANoConstantsConstants
+     |- AMultipleFunctionsFunctions
+     |  `- AFunction
+     |  |  |- func
+     |  |  |- foo
+     |  |  |- (
+     |  |  |- AManyParams
+     |  |  |  |- AOneParamParam
+     |  |  |  |  |- int
+     |  |  |  |  `- x
+     |  |  |  |- ,
+     |  |  |  `- AManyParams
+     |  |  |     |- AOneParamParam
+     |  |  |     |  |- int
+     |  |  |     |  `- y
+     |  |  |     `- ,
+     |  |  |     `- AOneParams
+     |  |  |        `- ANoParamParam
+     |  |  |- )
+     |  |  |- {
+     |  |  |- AMultipleStatements
+     |  |  |  |- ADeclarationStatement
+     |  |  |  |  `- ADeclareStatement
+     |  |  |  |     |- int
+     |  |  |  |     |- x
+     |  |  |  |     `- ;
+     |  |  |  `- AMultipleStatements
+     |  |  |     |- ADeclarationStatement
+     |  |  |     |  `- ADeclareStatement
+     |  |  |     |     |- int
+     |  |  |     |     |- y
+     |  |  |     |     `- ;
+     |  |  |     `- AMultipleStatements
+     |  |  |        |- ADeclarationStatement
+     |  |  |        |  `- ADeclareStatement
+     |  |  |        |     |- int
+     |  |  |        |     |- z
+     |  |  |        |     `- ;
+     |  |  |        `- AMultipleStatements
+     |  |  |           |- AAssignmentStatement
+     |  |  |           |  `- AAssignStatement
+     |  |  |           |     |- x
+     |  |  |           |     |- =
+     |  |  |           |     |- APassExpression
+     |  |  |           |     |  `- APassExpression2
+     |  |  |           |     |     `- APassExpression3
+     |  |  |           |     |        `- APassExpression4
+     |  |  |           |     |           `- APassExpressionMath1
+     |  |  |           |     |              `- APassExpressionMath2
+     |  |  |           |     |                 `- APassExpressionMath3
+     |  |  |           |     |                    `- APassExpressionMath4
+     |  |  |           |     |                       `- AIntOperand
+     |  |  |           |     |                          `- 1
+     |  |  |           |     `- ;
+     |  |  |           `- AMultipleStatements
+     |  |  |              |- AAssignmentStatement
+     |  |  |              |  `- AAssignStatement
+     |  |  |              |     |- y
+     |  |  |              |     |- =
+     |  |  |              |     |- APassExpression
+     |  |  |              |     |  `- APassExpression2
+     |  |  |              |     |     `- APassExpression3
+     |  |  |              |     |        `- APassExpression4
+     |  |  |              |     |           `- APassExpressionMath1
+     |  |  |              |     |              `- APassExpressionMath2
+     |  |  |              |     |                 `- APassExpressionMath3
+     |  |  |              |     |                    `- APassExpressionMath4
+     |  |  |              |     |                       `- AIntOperand
+     |  |  |              |     |                          `- 2
+     |  |  |              |     `- ;
+     |  |  |              `- AMultipleStatements
+     |  |  |                 `- AAssignmentStatement
+     |  |  |                 |  `- AAssignStatement
+     |  |  |                 |     |- z
+     |  |  |                 |     |- =
+     |  |  |                 |     |- APassExpression
+     |  |  |                 |     |  `- APassExpression2
+     |  |  |                 |     |     `- APassExpression3
+     |  |  |                 |     |        `- APassExpression4
+     |  |  |                 |     |           `- APassExpressionMath1
+     |  |  |                 |     |              `- AMultiplyExpressionMath2
+     |  |  |                 |     |                 |- APassExpressionMath2
+     |  |  |                 |     |                 |  `- APassExpressionMath3
+     |  |  |                 |     |                 |     `- APassExpressionMath4
+     |  |  |                 |     |                 |        `- AVariableOperand
+     |  |  |                 |     |                 |           `- x
+     |  |  |                 |     |                 |- *
+     |  |  |                 |     |                 `- APassExpressionMath3
+     |  |  |                 |     |                    `- APassExpressionMath4
+     |  |  |                 |     |                       `- AVariableOperand
+     |  |  |                 |     |                          `- y
+     |  |  |                 |     `- ;
+     |  |  |                 `- ANoStatementsStatements
+     |  |  `- }
+     |  `- ANoFunctionsFunctions
+     |- main
+     |- {
+     |- AMultipleStatements
+     |  |- ADeclarationStatement
+     |  |  `- ADeclareStatement
+     |  |     |- int
+     |  |     |- x1
+     |  |     `- ;
+     |  `- AMultipleStatements
+     |     |- ADeclarationStatement
+     |     |  `- ADeclareStatement
+     |     |     |- int
+     |     |     |- x2
+     |     |     `- ;
+     |     `- AMultipleStatements
+     |        |- ADeclarationStatement
+     |        |  `- ADeclareStatement
+     |        |     |- string
+     |        |     |- testString
+     |        |     `- ;
+     |        `- AMultipleStatements
+     |           |- AAssignmentStatement
+     |           |  `- AAssignStatement
+     |           |     |- x1
+     |           |     |- =
+     |           |     |- APassExpression
+     |           |     |  `- APassExpression2
+     |           |     |     `- APassExpression3
+     |           |     |        `- APassExpression4
+     |           |     |           `- APassExpressionMath1
+     |           |     |              `- APassExpressionMath2
+     |           |     |                 `- APassExpressionMath3
+     |           |     |                    `- APassExpressionMath4
+     |           |     |                       `- AIntOperand
+     |           |     |                          `- 3
+     |           |     `- ;
+     |           `- AMultipleStatements
+     |              |- AAssignmentStatement
+     |              |  `- AAssignStatement
+     |              |     |- x2
+     |              |     |- =
+     |              |     |- APassExpression
+     |              |     |  `- APassExpression2
+     |              |     |     `- APassExpression3
+     |              |     |        `- APassExpression4
+     |              |     |           `- APassExpressionMath1
+     |              |     |              `- APassExpressionMath2
+     |              |     |                 `- APassExpressionMath3
+     |              |     |                    `- APassExpressionMath4
+     |              |     |                       `- AIntOperand
+     |              |     |                          `- 5
+     |              |     `- ;
+     |              `- AMultipleStatements
+     |                 |- AAssignmentStatement
+     |                 |  `- AAssignStatement
+     |                 |     |- testString
+     |                 |     |- =
+     |                 |     |- APassExpression
+     |                 |     |  `- APassExpression2
+     |                 |     |     `- APassExpression3
+     |                 |     |        `- APassExpression4
+     |                 |     |           `- APassExpressionMath1
+     |                 |     |              `- APassExpressionMath2
+     |                 |     |                 `- APassExpressionMath3
+     |                 |     |                    `- APassExpressionMath4
+     |                 |     |                       `- AStrOperand
+     |                 |     |                          `- "test"
+     |                 |     `- ;
+     |                 `- AMultipleStatements
+     |                    `- AFuncCallStatement
+     |                    |  `- AFunctionCallStatement
+     |                    |     |- testString
+     |                    |     |- (
+     |                    |     |- AManyActualParameters
+     |                    |     |  |- AActualParamActualParam
+     |                    |     |  |  `- APassExpression
+     |                    |     |  |     `- APassExpression2
+     |                    |     |  |        `- APassExpression3
+     |                    |     |  |           `- APassExpression4
+     |                    |     |  |              `- APassExpressionMath1
+     |                    |     |  |                 `- APassExpressionMath2
+     |                    |     |  |                    `- APassExpressionMath3
+     |                    |     |  |                       `- APassExpressionMath4
+     |                    |     |  |                          `- AVariableOperand
+     |                    |     |  |                             `- x1
+     |                    |     |  |- ,
+     |                    |     |  `- AManyActualParameters
+     |                    |     |     |- AActualParamActualParam
+     |                    |     |     |  `- APassExpression
+     |                    |     |     |     `- APassExpression2
+     |                    |     |     |        `- APassExpression3
+     |                    |     |     |           `- APassExpression4
+     |                    |     |     |              `- APassExpressionMath1
+     |                    |     |     |                 `- APassExpressionMath2
+     |                    |     |     |                    `- APassExpressionMath3
+     |                    |     |     |                       `- APassExpressionMath4
+     |                    |     |     |                          `- AVariableOperand
+     |                    |     |     |                             `- x2
+     |                    |     |     `- ,
+     |                    |     |     `- ASingleActualParameters
+     |                    |     |        `- ANoActualParamActualParam
+     |                    |     |- )
+     |                    |     `- ;
+     |                    `- ANoStatementsStatements
+     `- }
+
+ 
+Incorrect 27: x(y,z) : reports failure when types of y,z don’t match formal parameters 
+Error on line 19:2 :: Types do not match between declaration and call
+Error on line 19:2 :: Types do not match between declaration and call
+
+- AProgram
+     |- ANoConstantsConstants
+     |- AMultipleFunctionsFunctions
+     |  `- AFunction
+     |  |  |- func
+     |  |  |- foo
+     |  |  |- (
+     |  |  |- AManyParams
+     |  |  |  |- AOneParamParam
+     |  |  |  |  |- int
+     |  |  |  |  `- x
+     |  |  |  |- ,
+     |  |  |  `- AManyParams
+     |  |  |     |- AOneParamParam
+     |  |  |     |  |- int
+     |  |  |     |  `- y
+     |  |  |     `- ,
+     |  |  |     `- AOneParams
+     |  |  |        `- ANoParamParam
+     |  |  |- )
+     |  |  |- {
+     |  |  |- AMultipleStatements
+     |  |  |  |- ADeclarationStatement
+     |  |  |  |  `- ADeclareStatement
+     |  |  |  |     |- int
+     |  |  |  |     |- x
+     |  |  |  |     `- ;
+     |  |  |  `- AMultipleStatements
+     |  |  |     |- ADeclarationStatement
+     |  |  |     |  `- ADeclareStatement
+     |  |  |     |     |- int
+     |  |  |     |     |- y
+     |  |  |     |     `- ;
+     |  |  |     `- AMultipleStatements
+     |  |  |        |- ADeclarationStatement
+     |  |  |        |  `- ADeclareStatement
+     |  |  |        |     |- int
+     |  |  |        |     |- z
+     |  |  |        |     `- ;
+     |  |  |        `- AMultipleStatements
+     |  |  |           |- AAssignmentStatement
+     |  |  |           |  `- AAssignStatement
+     |  |  |           |     |- x
+     |  |  |           |     |- =
+     |  |  |           |     |- APassExpression
+     |  |  |           |     |  `- APassExpression2
+     |  |  |           |     |     `- APassExpression3
+     |  |  |           |     |        `- APassExpression4
+     |  |  |           |     |           `- APassExpressionMath1
+     |  |  |           |     |              `- APassExpressionMath2
+     |  |  |           |     |                 `- APassExpressionMath3
+     |  |  |           |     |                    `- APassExpressionMath4
+     |  |  |           |     |                       `- AIntOperand
+     |  |  |           |     |                          `- 1
+     |  |  |           |     `- ;
+     |  |  |           `- AMultipleStatements
+     |  |  |              |- AAssignmentStatement
+     |  |  |              |  `- AAssignStatement
+     |  |  |              |     |- y
+     |  |  |              |     |- =
+     |  |  |              |     |- APassExpression
+     |  |  |              |     |  `- APassExpression2
+     |  |  |              |     |     `- APassExpression3
+     |  |  |              |     |        `- APassExpression4
+     |  |  |              |     |           `- APassExpressionMath1
+     |  |  |              |     |              `- APassExpressionMath2
+     |  |  |              |     |                 `- APassExpressionMath3
+     |  |  |              |     |                    `- APassExpressionMath4
+     |  |  |              |     |                       `- AIntOperand
+     |  |  |              |     |                          `- 2
+     |  |  |              |     `- ;
+     |  |  |              `- AMultipleStatements
+     |  |  |                 `- AAssignmentStatement
+     |  |  |                 |  `- AAssignStatement
+     |  |  |                 |     |- z
+     |  |  |                 |     |- =
+     |  |  |                 |     |- APassExpression
+     |  |  |                 |     |  `- APassExpression2
+     |  |  |                 |     |     `- APassExpression3
+     |  |  |                 |     |        `- APassExpression4
+     |  |  |                 |     |           `- APassExpressionMath1
+     |  |  |                 |     |              `- AMultiplyExpressionMath2
+     |  |  |                 |     |                 |- APassExpressionMath2
+     |  |  |                 |     |                 |  `- APassExpressionMath3
+     |  |  |                 |     |                 |     `- APassExpressionMath4
+     |  |  |                 |     |                 |        `- AVariableOperand
+     |  |  |                 |     |                 |           `- x
+     |  |  |                 |     |                 |- *
+     |  |  |                 |     |                 `- APassExpressionMath3
+     |  |  |                 |     |                    `- APassExpressionMath4
+     |  |  |                 |     |                       `- AVariableOperand
+     |  |  |                 |     |                          `- y
+     |  |  |                 |     `- ;
+     |  |  |                 `- ANoStatementsStatements
+     |  |  `- }
+     |  `- ANoFunctionsFunctions
+     |- main
+     |- {
+     |- AMultipleStatements
+     |  |- ADeclarationStatement
+     |  |  `- ADeclareStatement
+     |  |     |- float
+     |  |     |- x1
+     |  |     `- ;
+     |  `- AMultipleStatements
+     |     |- ADeclarationStatement
+     |     |  `- ADeclareStatement
+     |     |     |- float
+     |     |     |- x2
+     |     |     `- ;
+     |     `- AMultipleStatements
+     |        |- AAssignmentStatement
+     |        |  `- AAssignStatement
+     |        |     |- x1
+     |        |     |- =
+     |        |     |- APassExpression
+     |        |     |  `- APassExpression2
+     |        |     |     `- APassExpression3
+     |        |     |        `- APassExpression4
+     |        |     |           `- APassExpressionMath1
+     |        |     |              `- APassExpressionMath2
+     |        |     |                 `- APassExpressionMath3
+     |        |     |                    `- APassExpressionMath4
+     |        |     |                       `- AFloOperand
+     |        |     |                          `- 3.13
+     |        |     `- ;
+     |        `- AMultipleStatements
+     |           |- AAssignmentStatement
+     |           |  `- AAssignStatement
+     |           |     |- x2
+     |           |     |- =
+     |           |     |- APassExpression
+     |           |     |  `- APassExpression2
+     |           |     |     `- APassExpression3
+     |           |     |        `- APassExpression4
+     |           |     |           `- APassExpressionMath1
+     |           |     |              `- APassExpressionMath2
+     |           |     |                 `- APassExpressionMath3
+     |           |     |                    `- APassExpressionMath4
+     |           |     |                       `- AFloOperand
+     |           |     |                          `- 5.5
+     |           |     `- ;
+     |           `- AMultipleStatements
+     |              `- AFuncCallStatement
+     |              |  `- AFunctionCallStatement
+     |              |     |- foo
+     |              |     |- (
+     |              |     |- AManyActualParameters
+     |              |     |  |- AActualParamActualParam
+     |              |     |  |  `- APassExpression
+     |              |     |  |     `- APassExpression2
+     |              |     |  |        `- APassExpression3
+     |              |     |  |           `- APassExpression4
+     |              |     |  |              `- APassExpressionMath1
+     |              |     |  |                 `- APassExpressionMath2
+     |              |     |  |                    `- APassExpressionMath3
+     |              |     |  |                       `- APassExpressionMath4
+     |              |     |  |                          `- AVariableOperand
+     |              |     |  |                             `- x1
+     |              |     |  |- ,
+     |              |     |  `- AManyActualParameters
+     |              |     |     |- AActualParamActualParam
+     |              |     |     |  `- APassExpression
+     |              |     |     |     `- APassExpression2
+     |              |     |     |        `- APassExpression3
+     |              |     |     |           `- APassExpression4
+     |              |     |     |              `- APassExpressionMath1
+     |              |     |     |                 `- APassExpressionMath2
+     |              |     |     |                    `- APassExpressionMath3
+     |              |     |     |                       `- APassExpressionMath4
+     |              |     |     |                          `- AVariableOperand
+     |              |     |     |                             `- x2
+     |              |     |     `- ,
+     |              |     |     `- ASingleActualParameters
+     |              |     |        `- ANoActualParamActualParam
+     |              |     |- )
+     |              |     `- ;
+     |              `- ANoStatementsStatements
+     `- }
+
  

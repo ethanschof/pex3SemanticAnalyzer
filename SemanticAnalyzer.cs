@@ -870,7 +870,15 @@ namespace CS426.analysis
                 newParameter.name = node.GetVarname().Text;
                 newParameter.variableType = (TypeDefinition)typeDef;
 
+                foreach (VariableDefinition p in parameters) {
+                    if (p.name == node.GetVarname().Text)
+                    {
+                        PrintWarning(node.GetVarname(), "Parameter name used more than once");
+                    }
+                }
+
                 parameters.Add(newParameter);
+                
             }
         }
 

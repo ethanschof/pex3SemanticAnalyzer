@@ -1,0 +1,22 @@
+﻿func foo(int x, int y,) {
+	int x;
+	int y;
+	int z;
+
+	x = 1;
+	y = 2;
+
+	z = x * y;
+}
+
+main {
+	int x1;
+	int x2;
+	string testString;
+
+	x1 = 3;
+	x2 = 5;
+	testString = "test";
+
+	testString(x1, x2,);
+}

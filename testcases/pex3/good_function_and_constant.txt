@@ -1,0 +1,29 @@
+﻿def int myConstant = 5; 
+
+func foo(int x, int y,) {
+	int x;
+	int y;
+	int z;
+
+	x = 1;
+	y = 2;
+
+	z = x - y;
+}
+
+main {
+
+	int a;
+	int b;
+	int c;
+
+	a = 1;
+	b = 2;
+	c = 3; 
+
+	if(x > y AND y != z OR z >= x) {
+		x = x + 1;
+		foo(a, b,);
+	}
+
+}

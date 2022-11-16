@@ -10,6 +10,6 @@ main {
 
 	y = 3;
 
-	foo = y;
+	foo = x;
 
 }

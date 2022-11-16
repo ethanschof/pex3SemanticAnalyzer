@@ -567,6 +567,11 @@
     <Content Include="testcases\pex2\main1.txt" />
     <Content Include="testcases\pex2\while1.txt" />
     <Content Include="testcases\pex2\while2.txt" />
+    <Content Include="testcases\pex3\bad_procedure_call_formal_param_types_no_match.txt" />
+    <Content Include="testcases\pex3\bad_procedure_call_x_not_procedure.txt" />
+    <Content Include="testcases\pex3\bad_procedure_formal_parameter_declared_twice.txt" />
+    <Content Include="testcases\pex3\bad_procedure_call_x_not_declared.txt" />
+    <Content Include="testcases\pex3\bad_procedure_formal_parameter_incorrect.txt" />
     <Content Include="testcases\pex3\bad_procedure_name_already_used.txt" />
     <Content Include="testcases\pex3\bad_assign_types_don%27t_match.txt" />
     <Content Include="testcases\pex3\bad_assign_x_is_constant.txt" />
@@ -586,6 +591,7 @@
     <Content Include="testcases\pex3\bad_while_expr_not_bool.txt" />
     <Content Include="testcases\pex3\bad_operators_types_no_match.txt" />
     <Content Include="testcases\pex3\good_and_or_not.txt" />
+    <Content Include="testcases\pex3\good_function_and_constant.txt" />
     <Content Include="testcases\pex3\good_while_expr.txt" />
     <Content Include="testcases\pex3\good_if_expr.txt" />
     <Content Include="testcases\pex3\bad_if_expr_not_bool.txt" />

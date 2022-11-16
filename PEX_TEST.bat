@@ -30,6 +30,10 @@ echo Correct 4: Proper AND OR NOT >> %file%
 bin\Debug\ConsoleApplication.exe testcases\pex3\good_and_or_not.txt >> %file%
 echo. >> %file%
 
+echo Correct 5: Proper Function and Constant >> %file%
+bin\Debug\ConsoleApplication.exe testcases\pex3\good_function_and_constant.txt >> %file%
+echo. >> %file%
+
 :: ----------------------------------------
 :: BAD EXAMPLES
 :: ----------------------------------------
@@ -121,6 +125,26 @@ echo. >> %file%
 
 echo Incorrect 22: Procedures: reports failure when procedure name already used >> %file%
 bin\Debug\ConsoleApplication.exe testcases\pex3\bad_procedure_name_already_used.txt >> %file%
+echo. >> %file%
+
+echo Incorrect 23: Procedures: reports failure when formal parameter declared incorrectly (e.g. x x) >> %file%
+bin\Debug\ConsoleApplication.exe testcases\pex3\bad_procedure_formal_parameter_incorrect.txt >> %file%
+echo. >> %file%
+
+echo Incorrect 24: Procedures: reports failure when formal parameter declared twice (e.g. int x, int x) >> %file%
+bin\Debug\ConsoleApplication.exe testcases\pex3\bad_procedure_formal_parameter_declared_twice.txt >> %file%
+echo. >> %file%
+
+echo Incorrect 25: x(y,z) : reports failure when x is not declared >> %file%
+bin\Debug\ConsoleApplication.exe testcases\pex3\bad_procedure_call_x_not_declared.txt >> %file%
+echo. >> %file%
+
+echo Incorrect 26: x(y,z) : reports failure when x is declared, but not a procedure >> %file%
+bin\Debug\ConsoleApplication.exe testcases\pex3\bad_procedure_call_x_not_procedure.txt >> %file%
+echo. >> %file%
+
+echo Incorrect 27: x(y,z) : reports failure when types of y,z don’t match formal parameters >> %file%
+bin\Debug\ConsoleApplication.exe testcases\pex3\bad_procedure_call_formal_param_types_no_match.txt >> %file%
 echo. >> %file%
 
 pause
