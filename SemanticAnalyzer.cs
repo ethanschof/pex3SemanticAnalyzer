@@ -209,11 +209,11 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetMult(), "Cannot multiply " + expressionMath2Def.name + " by " + expressionMath3Def.name);
             } 
-            else if (!(expressionMath2Def is IntegerDefinition) || !(expressionMath2Def is FloatDefinition))
+            else if (!(expressionMath2Def is IntegerDefinition) && !(expressionMath2Def is FloatDefinition))
             {
                 PrintWarning(node.GetMult(), "You can only multiply integers and floats");
             }
-            else if (!(expressionMath3Def is IntegerDefinition) || !(expressionMath3Def is FloatDefinition))
+            else if (!(expressionMath3Def is IntegerDefinition) && !(expressionMath3Def is FloatDefinition))
             {
                 PrintWarning(node.GetMult(), "You can only multiply integers and floats");
             }
@@ -240,11 +240,11 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetDivide(), "Cannot divide " + expressionMath2Def.name + " by " + expressionMath3Def.name);
             }
-            else if (!(expressionMath2Def is IntegerDefinition) || !(expressionMath2Def is FloatDefinition))
+            else if (!(expressionMath2Def is IntegerDefinition) && !(expressionMath2Def is FloatDefinition))
             {
                 PrintWarning(node.GetDivide(), "You can only divide integers and floats");
             }
-            else if (!(expressionMath3Def is IntegerDefinition) || !(expressionMath3Def is FloatDefinition))
+            else if (!(expressionMath3Def is IntegerDefinition) && !(expressionMath3Def is FloatDefinition))
             {
                 PrintWarning(node.GetDivide(), "You can only divide integers and floats");
             }
@@ -302,11 +302,11 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetPlus(), "Cannot add " + expressionMath1Def.name + " to " + expressionMath2Def.name);
             }
-            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
+            else if (!(expressionMath1Def is IntegerDefinition) && !(expressionMath1Def is FloatDefinition))
             {
                 PrintWarning(node.GetPlus(), "You can only add integers and floats");
             }
-            else if (!(expressionMath2Def is IntegerDefinition) || !(expressionMath2Def is FloatDefinition))
+            else if (!(expressionMath2Def is IntegerDefinition) && !(expressionMath2Def is FloatDefinition))
             {
                 PrintWarning(node.GetPlus(), "You can only add integers and floats");
             }
@@ -333,11 +333,11 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetMinus(), "Cannot subtract " + expressionMath1Def.name + " by " + expressionMath2Def.name);
             }
-            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
+            else if (!(expressionMath1Def is IntegerDefinition) && !(expressionMath1Def is FloatDefinition))
             {
                 PrintWarning(node.GetMinus(), "You can only subtract integers and floats");
             }
-            else if (!(expressionMath2Def is IntegerDefinition) || !(expressionMath2Def is FloatDefinition))
+            else if (!(expressionMath2Def is IntegerDefinition) && !(expressionMath2Def is FloatDefinition))
             {
                 PrintWarning(node.GetMinus(), "You can only subtract integers and floats");
             }
@@ -384,7 +384,7 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetGreatEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
-            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
+            else if (!(expressionMath1Def is IntegerDefinition) && !(expressionMath1Def is FloatDefinition))
             {
                 PrintWarning(node.GetGreatEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
@@ -414,7 +414,7 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetLessEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
-            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
+            else if (!(expressionMath1Def is IntegerDefinition) && !(expressionMath1Def is FloatDefinition))
             {
                 PrintWarning(node.GetLessEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
@@ -444,7 +444,7 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetGreaterThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
-            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
+            else if (!(expressionMath1Def is IntegerDefinition) && !(expressionMath1Def is FloatDefinition))
             {
                 PrintWarning(node.GetGreaterThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
@@ -474,7 +474,7 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetLessThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
-            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
+            else if (!(expressionMath1Def is IntegerDefinition) && !(expressionMath1Def is FloatDefinition))
             {
                 PrintWarning(node.GetLessThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
@@ -518,7 +518,7 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetEquivalence(), "Cannot compare " + expression3Def.name + " with " + expression4Def.name);
             } 
-            else if (!(expression3Def is IntegerDefinition) || !(expression3Def is FloatDefinition))
+            else if (!(expression3Def is IntegerDefinition) && !(expression3Def is FloatDefinition))
             {
                 PrintWarning(node.GetEquivalence(), "Can only compare integers and floats of same type");
             } 
@@ -546,7 +546,7 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetNotEquivalent(), "Cannot compare " + expression3Def.name + " with " + expression4Def.name);
             }
-            else if (!(expression3Def is IntegerDefinition) || !(expression3Def is FloatDefinition))
+            else if (!(expression3Def is IntegerDefinition) && !(expression3Def is FloatDefinition))
             {
                 PrintWarning(node.GetNotEquivalent(), "Can only compare integers and floats of same type");
             }
@@ -741,7 +741,8 @@ namespace CS426.analysis
             {
                 FunctionDefinition func = (FunctionDefinition)idDef;
                 // Make sure number of arguements and parameters are the same
-                if (!(args.Count == func.parameters.Count) || !((func.parameters.Count == 0) && (parameters.Count == args.Count)) )
+                // || !((func.parameters.Count == 0) && (parameters.Count == args.Count))
+                if (!(args.Count == func.parameters.Count)  )
                 {
                     PrintWarning(node.GetId(), "Incorrect number of arguments for function call");
                 } 
