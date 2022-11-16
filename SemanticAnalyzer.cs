@@ -25,6 +25,8 @@ namespace CS426.analysis
             globalSymbolTable = new Dictionary<string, Definition>();
             localSymbolTable = new Dictionary<string, Definition>();
             decoratedParseTree = new Dictionary<Node, Definition>();
+            parameters = new List<VariableDefinition>();
+            args = new List<TypeDefinition>();
 
             Definition intDefinition = new IntegerDefinition();
             intDefinition.name = "int";
@@ -751,7 +753,7 @@ namespace CS426.analysis
                     // Loop through to check each type of arguement and variable
                     for (var i = 0; i < args.Count; i++)
                     {
-                        if(args[i].GetType() != func.parameters[i].GetType())
+                        if(args[i] != func.parameters[i].variableType)
                         {
                             PrintWarning(node.GetId(), "Types do not match between declaration and call");
                         }
@@ -772,7 +774,7 @@ namespace CS426.analysis
 
             if (!localSymbolTable.TryGetValue(node.GetId().Text, out idDef))
             {
-                PrintWarning(node.GetId(), "Identifier " + node.GetId().Text + " does not exist");
+                PrintWarning(node.GetId(), "Identifier " + node.GetId().Text + " does not exist in local symbol table");
             }
             else if (!(idDef is VariableDefinition))
             {
@@ -857,15 +859,18 @@ namespace CS426.analysis
                 // Check if variable name is already being used
                 PrintWarning(node.GetVarname(), "ID already declared in local symbol table");
             }
-            else if (!globalSymbolTable.TryGetValue(node.GetVarname().Text, out idDef))
+            else if (globalSymbolTable.TryGetValue(node.GetVarname().Text, out idDef))
             {
-                // variable name does not exist in global, maybe a function, maybe tried to name something int
-                PrintWarning(node.GetVarname(), "ID doesn't exist in global symbol table");
+                PrintWarning(node.GetVarname(), "ID already exists in global symbol table");
             }
             else
             {
                 // Everything is correct
-                parameters.Add((VariableDefinition)typeDef);
+                VariableDefinition newParameter = new VariableDefinition();
+                newParameter.name = node.GetVarname().Text;
+                newParameter.variableType = (TypeDefinition)typeDef;
+
+                parameters.Add(newParameter);
             }
         }
 
