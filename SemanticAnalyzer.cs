@@ -177,8 +177,8 @@ namespace CS426.analysis
             {
                 // Problem occured lower on the tree
             }
-            // The thing being bitted is not a float or an integer
-            else if (!(expressionMath4 is IntegerDefinition) && !(expressionMath4 is FloatDefinition))
+            // The thing being bitted is not a boolean
+            else if (!(expressionMath4 is BooleanDefinition))
             {
                 PrintWarning(node.GetBitNot(), "Only floats and integers can be negated");
             }
@@ -365,57 +365,6 @@ namespace CS426.analysis
         }
 
         // ----------------------------------------------------------------
-        // expression3
-        // ----------------------------------------------------------------
-        public override void OutAPassExpression3(APassExpression3 node)
-        {
-            Definition expression4;
-
-            if (!decoratedParseTree.TryGetValue(node.GetExpression4(), out expression4))
-            {
-                // Problem occured lower on the tree
-            }
-            else
-            {
-                decoratedParseTree.Add(node, expression4);
-            }
-        }
-
-        // ----------------------------------------------------------------
-        // expression2
-        // ----------------------------------------------------------------
-        public override void OutAPassExpression2(APassExpression2 node)
-        {
-            Definition expression3;
-
-            if (!decoratedParseTree.TryGetValue(node.GetExpression3(), out expression3))
-            {
-                // Problem occured lower on the tree
-            }
-            else
-            {
-                decoratedParseTree.Add(node, expression3);
-            }
-        }
-
-        // ----------------------------------------------------------------
-        // expression
-        // ----------------------------------------------------------------
-        public override void OutAPassExpression(APassExpression node)
-        {
-            Definition expression2;
-
-            if (!decoratedParseTree.TryGetValue(node.GetExpression2(), out expression2))
-            {
-                // Problem occured lower on the tree
-            }
-            else
-            {
-                decoratedParseTree.Add(node, expression2);
-            }
-        }
-
-        // ----------------------------------------------------------------
         // GreaterEQ DONE
         // ----------------------------------------------------------------
         public override void OutAGreateqExpression4(AGreateqExpression4 node)
@@ -435,7 +384,7 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetGreatEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
-            else if (!(expressionMath1Def is IntegerDefinition))
+            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
             {
                 PrintWarning(node.GetGreatEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
@@ -465,7 +414,7 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetLessEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
-            else if (!(expressionMath1Def is IntegerDefinition))
+            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
             {
                 PrintWarning(node.GetLessEqThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
@@ -495,7 +444,7 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetGreaterThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
-            else if (!(expressionMath1Def is IntegerDefinition))
+            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
             {
                 PrintWarning(node.GetGreaterThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
@@ -525,7 +474,7 @@ namespace CS426.analysis
             {
                 PrintWarning(node.GetLessThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
-            else if (!(expressionMath1Def is IntegerDefinition))
+            else if (!(expressionMath1Def is IntegerDefinition) || !(expressionMath1Def is FloatDefinition))
             {
                 PrintWarning(node.GetLessThan(), "Cannot compare " + expressionMath1Def.name + " with " + expression4Def.name);
             }
@@ -536,10 +485,183 @@ namespace CS426.analysis
         }
 
         // ----------------------------------------------------------------
-        // while_statement
+        // expression3
+        // ----------------------------------------------------------------
+        public override void OutAPassExpression3(APassExpression3 node)
+        {
+            Definition expression4;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression4(), out expression4))
+            {
+                // Problem occured lower on the tree
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expression4);
+            }
+        }
+
+        public override void OutAEquivalentExpression3(AEquivalentExpression3 node)
+        {
+            Definition expression3Def;
+            Definition expression4Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression3(), out expression3Def))
+            {
+                // problem occured lower on the tree
+            } 
+            else if (!decoratedParseTree.TryGetValue(node.GetExpression4(), out expression4Def))
+            {
+                // problem lower on tree
+            }
+            else if ((expression3Def.GetType() != expression4Def.GetType()))
+            {
+                PrintWarning(node.GetEquivalence(), "Cannot compare " + expression3Def.name + " with " + expression4Def.name);
+            } 
+            else if (!(expression3Def is IntegerDefinition) || !(expression3Def is FloatDefinition))
+            {
+                PrintWarning(node.GetEquivalence(), "Can only compare integers and floats of same type");
+            } 
+            else
+            {
+                decoratedParseTree.Add(node, new BooleanDefinition());
+            }
+
+        }
+
+        public override void OutANotequivalentExpression3(ANotequivalentExpression3 node)
+        {
+            Definition expression3Def;
+            Definition expression4Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression3(), out expression3Def))
+            {
+                // problem occured lower on the tree
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpression4(), out expression4Def))
+            {
+                // problem lower on tree
+            }
+            else if ((expression3Def.GetType() != expression4Def.GetType()))
+            {
+                PrintWarning(node.GetNotEquivalent(), "Cannot compare " + expression3Def.name + " with " + expression4Def.name);
+            }
+            else if (!(expression3Def is IntegerDefinition) || !(expression3Def is FloatDefinition))
+            {
+                PrintWarning(node.GetNotEquivalent(), "Can only compare integers and floats of same type");
+            }
+            else
+            {
+                decoratedParseTree.Add(node, new BooleanDefinition());
+            }
+        }
+
+        // ----------------------------------------------------------------
+        // expression2
+        // ----------------------------------------------------------------
+        public override void OutAPassExpression2(APassExpression2 node)
+        {
+            Definition expression3;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression3(), out expression3))
+            {
+                // Problem occured lower on the tree
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expression3);
+            }
+        }
+
+        public override void OutABitandExpression2(ABitandExpression2 node)
+        {
+            Definition expression2Def;
+            Definition expression3Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression2(), out expression2Def))
+            {
+                // problem occured lower on the tree
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpression3(), out expression3Def))
+            {
+                // problem lower on tree
+            }
+            else if ((expression2Def.GetType() != expression3Def.GetType()))
+            {
+                PrintWarning(node.GetBitAnd(), "Cannot bit operate " + expression2Def.name + " with " + expression3Def.name);
+            }
+            else if (!(expression2Def is BooleanDefinition))
+            {
+                PrintWarning(node.GetBitAnd(), "Can only do bit operations on Boolean types");
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expression2Def);
+            }
+        }
+
+
+        // ----------------------------------------------------------------
+        // expression
+        // ----------------------------------------------------------------
+        public override void OutAPassExpression(APassExpression node)
+        {
+            Definition expression2;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression2(), out expression2))
+            {
+                // Problem occured lower on the tree
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expression2);
+            }
+        }
+
+        public override void OutABitorExpression(ABitorExpression node)
+        {
+            Definition expressionDef;
+            Definition expression2Def;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression(), out expressionDef))
+            {
+                // problem occured lower on the tree
+            }
+            else if (!decoratedParseTree.TryGetValue(node.GetExpression2(), out expression2Def))
+            {
+                // problem lower on tree
+            }
+            else if ((expressionDef.GetType() != expression2Def.GetType()))
+            {
+                PrintWarning(node.GetBitOr(), "Cannot bit operate " + expressionDef.name + " with " + expression2Def.name);
+            }
+            else if (!(expressionDef is BooleanDefinition))
+            {
+                PrintWarning(node.GetBitOr(), "Can only do bit operations on Boolean types");
+            }
+            else
+            {
+                decoratedParseTree.Add(node, expressionDef);
+            }
+        }
+
+        // ----------------------------------------------------------------
+        // while_statement DONE
         // ----------------------------------------------------------------
 
-        // TODO
+        public override void OutAWhileWhileStatement(AWhileWhileStatement node)
+        {
+            Definition whileConditionalDef;
+
+            if (!decoratedParseTree.TryGetValue(node.GetExpression(), out whileConditionalDef))
+            {
+                // error occured lower in the tree
+            }
+            else if (!(whileConditionalDef is BooleanDefinition))
+            {
+                PrintWarning(node.GetWhile(), "Conditional is not in boolean form");
+            }
+        }
 
         // ----------------------------------------------------------------
         // if_statement DONE
