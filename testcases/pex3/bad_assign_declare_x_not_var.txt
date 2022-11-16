@@ -1,4 +1,4 @@
-﻿func foo(int x,) {
+﻿func foo(int x) {
 	string myName;
 	
 	myName = "Joseph";
