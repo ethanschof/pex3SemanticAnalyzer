@@ -1,0 +1,9 @@
+﻿def int x = 5; 
+
+main {
+	int y;
+
+	y = 2;
+	x = y;
+
+}

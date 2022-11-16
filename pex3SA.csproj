@@ -567,6 +567,11 @@
     <Content Include="testcases\pex2\main1.txt" />
     <Content Include="testcases\pex2\while1.txt" />
     <Content Include="testcases\pex2\while2.txt" />
+    <Content Include="testcases\pex3\bad_procedure_name_already_used.txt" />
+    <Content Include="testcases\pex3\bad_assign_types_don%27t_match.txt" />
+    <Content Include="testcases\pex3\bad_assign_x_is_constant.txt" />
+    <Content Include="testcases\pex3\bad_assign_declare_x_not_var.txt" />
+    <Content Include="testcases\pex3\bad_assign_x_not_declared.txt" />
     <Content Include="testcases\pex3\bad_and_or_not_type_no_bool.txt" />
     <Content Include="testcases\pex3\bad_bool_types_not_int_or_float.txt" />
     <Content Include="testcases\pex3\bad_bool_types_no_match.txt" />

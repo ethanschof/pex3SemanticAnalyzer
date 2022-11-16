@@ -95,12 +95,32 @@ echo Incorrect 15: and/or/not fail when types aren’t Boolean >> %file%
 bin\Debug\ConsoleApplication.exe testcases\pex3\bad_and_or_not_type_no_bool.txt >> %file%
 echo. >> %file%
 
-echo Incorrect 16: <,<=,>,>=.=. fail when types don’t match >> %file%
+echo Incorrect 16: greater than, less than, etc fail when types don’t match >> %file%
 bin\Debug\ConsoleApplication.exe testcases\pex3\bad_bool_types_no_match.txt >> %file%
 echo. >> %file%
 
-echo Incorrect 17: <,<=,>,>=.=. fail when types aren’t integer or float >> %file%
+echo Incorrect 17: greater than, less than, etc fail when types aren’t integer or float >> %file%
 bin\Debug\ConsoleApplication.exe testcases\pex3\bad_bool_types_not_int_or_float.txt >> %file%
+echo. >> %file%
+
+echo Incorrect 18: Assignment: x:=y fails when x is not declared >> %file%
+bin\Debug\ConsoleApplication.exe testcases\pex3\bad_assign_x_not_declared.txt >> %file%
+echo. >> %file%
+
+echo Incorrect 19: Assignment: x:=y fails when x is declared, but not a variable >> %file%
+bin\Debug\ConsoleApplication.exe testcases\pex3\bad_assign_declare_x_not_var.txt >> %file%
+echo. >> %file%
+
+echo Incorrect 20: Assignment: x:=y fails when x is constant >> %file%
+bin\Debug\ConsoleApplication.exe testcases\pex3\bad_assign_x_is_constant.txt >> %file%
+echo. >> %file%
+
+echo Incorrect 21: Assignment: x:=y fails when types don’t match >> %file%
+bin\Debug\ConsoleApplication.exe testcases\pex3\bad_assign_types_don't_match.txt >> %file%
+echo. >> %file%
+
+echo Incorrect 22: Procedures: reports failure when procedure name already used >> %file%
+bin\Debug\ConsoleApplication.exe testcases\pex3\bad_procedure_name_already_used.txt >> %file%
 echo. >> %file%
 
 pause

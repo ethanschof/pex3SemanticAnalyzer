@@ -1,0 +1,9 @@
+﻿main {
+	int x;
+	float y; 
+
+	y = 1.23;
+
+	x = y;
+
+}
