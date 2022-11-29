@@ -1,0 +1,8 @@
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex4codeGenerator\obj\x86\Debug\ConsoleApplication.exe
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex4codeGenerator\obj\x86\Debug\ConsoleApplication.pdb
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex4codeGenerator\obj\x86\Debug\pex4CodeGenerator.csproj.AssemblyReference.cache
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex4codeGenerator\obj\x86\Debug\pex4CodeGenerator.csproj.SuggestedBindingRedirects.cache
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex4codeGenerator\obj\x86\Debug\pex4CodeGenerator.csproj.CoreCompileInputs.cache
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex4codeGenerator\bin\Debug\ConsoleApplication.exe.config
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex4codeGenerator\bin\Debug\ConsoleApplication.exe
+C:\Users\C23Ethan.Schofield\Documents\GitHub\pex4codeGenerator\bin\Debug\ConsoleApplication.pdb
