@@ -12,6 +12,10 @@ public abstract class PProgram : Node
 {
 }
 
+public abstract class PMainState : Node
+{
+}
+
 public abstract class PConstants : Node
 {
 }
@@ -113,10 +117,7 @@ public sealed class AProgram : PProgram
 {
     private PConstants _constants_;
     private PFunctions _functions_;
-    private TMainDef _main_def_;
-    private TOpenBracket _open_bracket_;
-    private PStatements _statements_;
-    private TCloseBracket _close_bracket_;
+    private PMainState _main_state_;
 
     public AProgram ()
     {
@@ -125,18 +126,12 @@ public sealed class AProgram : PProgram
     public AProgram (
             PConstants _constants_,
             PFunctions _functions_,
-            TMainDef _main_def_,
-            TOpenBracket _open_bracket_,
-            PStatements _statements_,
-            TCloseBracket _close_bracket_
+            PMainState _main_state_
     )
     {
         SetConstants (_constants_);
         SetFunctions (_functions_);
-        SetMainDef (_main_def_);
-        SetOpenBracket (_open_bracket_);
-        SetStatements (_statements_);
-        SetCloseBracket (_close_bracket_);
+        SetMainState (_main_state_);
     }
 
     public override Object Clone()
@@ -144,10 +139,7 @@ public sealed class AProgram : PProgram
         return new AProgram (
             (PConstants)CloneNode (_constants_),
             (PFunctions)CloneNode (_functions_),
-            (TMainDef)CloneNode (_main_def_),
-            (TOpenBracket)CloneNode (_open_bracket_),
-            (PStatements)CloneNode (_statements_),
-            (TCloseBracket)CloneNode (_close_bracket_)
+            (PMainState)CloneNode (_main_state_)
         );
     }
 
@@ -204,6 +196,118 @@ public sealed class AProgram : PProgram
 
         _functions_ = node;
     }
+    public PMainState GetMainState ()
+    {
+        return _main_state_;
+    }
+
+    public void SetMainState (PMainState node)
+    {
+        if(_main_state_ != null)
+        {
+            _main_state_.Parent(null);
+        }
+
+        if(node != null)
+        {
+            if(node.Parent() != null)
+            {
+                node.Parent().RemoveChild(node);
+            }
+
+            node.Parent(this);
+        }
+
+        _main_state_ = node;
+    }
+
+    public override string ToString()
+    {
+        return ""
+            + ToString (_constants_)
+            + ToString (_functions_)
+            + ToString (_main_state_)
+        ;
+    }
+
+    internal override void RemoveChild(Node child)
+    {
+        if ( _constants_ == child )
+        {
+            _constants_ = null;
+            return;
+        }
+        if ( _functions_ == child )
+        {
+            _functions_ = null;
+            return;
+        }
+        if ( _main_state_ == child )
+        {
+            _main_state_ = null;
+            return;
+        }
+    }
+
+    internal override void ReplaceChild(Node oldChild, Node newChild)
+    {
+        if ( _constants_ == oldChild )
+        {
+            SetConstants ((PConstants) newChild);
+            return;
+        }
+        if ( _functions_ == oldChild )
+        {
+            SetFunctions ((PFunctions) newChild);
+            return;
+        }
+        if ( _main_state_ == oldChild )
+        {
+            SetMainState ((PMainState) newChild);
+            return;
+        }
+    }
+
+}
+public sealed class AMainState : PMainState
+{
+    private TMainDef _main_def_;
+    private TOpenBracket _open_bracket_;
+    private PStatements _statements_;
+    private TCloseBracket _close_bracket_;
+
+    public AMainState ()
+    {
+    }
+
+    public AMainState (
+            TMainDef _main_def_,
+            TOpenBracket _open_bracket_,
+            PStatements _statements_,
+            TCloseBracket _close_bracket_
+    )
+    {
+        SetMainDef (_main_def_);
+        SetOpenBracket (_open_bracket_);
+        SetStatements (_statements_);
+        SetCloseBracket (_close_bracket_);
+    }
+
+    public override Object Clone()
+    {
+        return new AMainState (
+            (TMainDef)CloneNode (_main_def_),
+            (TOpenBracket)CloneNode (_open_bracket_),
+            (PStatements)CloneNode (_statements_),
+            (TCloseBracket)CloneNode (_close_bracket_)
+        );
+    }
+
+    public override void Apply(Switch sw)
+    {
+        ((Analysis) sw).CaseAMainState(this);
+    }
+
     public TMainDef GetMainDef ()
     {
         return _main_def_;
@@ -304,8 +408,6 @@ public sealed class AProgram : PProgram
     public override string ToString()
     {
         return ""
-            + ToString (_constants_)
-            + ToString (_functions_)
             + ToString (_main_def_)
             + ToString (_open_bracket_)
             + ToString (_statements_)
@@ -315,16 +417,6 @@ public sealed class AProgram : PProgram
 
     internal override void RemoveChild(Node child)
     {
-        if ( _constants_ == child )
-        {
-            _constants_ = null;
-            return;
-        }
-        if ( _functions_ == child )
-        {
-            _functions_ = null;
-            return;
-        }
         if ( _main_def_ == child )
         {
             _main_def_ = null;
@@ -349,16 +441,6 @@ public sealed class AProgram : PProgram
 
     internal override void ReplaceChild(Node oldChild, Node newChild)
     {
-        if ( _constants_ == oldChild )
-        {
-            SetConstants ((PConstants) newChild);
-            return;
-        }
-        if ( _functions_ == oldChild )
-        {
-            SetFunctions ((PFunctions) newChild);
-            return;
-        }
         if ( _main_def_ == oldChild )
         {
             SetMainDef ((TMainDef) newChild);

@@ -16,6 +16,7 @@ public interface Analysis : Switch
 
     void CaseStart(Start node);
     void CaseAProgram(AProgram node);
+    void CaseAMainState(AMainState node);
     void CaseAMultipleConstantsConstants(AMultipleConstantsConstants node);
     void CaseANoConstantsConstants(ANoConstantsConstants node);
     void CaseAConstantDeclareConstant(AConstantDeclareConstant node);
@@ -170,6 +171,10 @@ public class AnalysisAdapter : Analysis
     }
 
     public virtual void CaseAProgram(AProgram node)
+    {
+        DefaultCase(node);
+    }
+    public virtual void CaseAMainState(AMainState node)
     {
         DefaultCase(node);
     }
@@ -579,6 +584,25 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetFunctions().Apply(this);
         }
+        if(node.GetMainState() != null)
+        {
+            node.GetMainState().Apply(this);
+        }
+        OutAProgram(node);
+    }
+    public virtual void InAMainState(AMainState node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAMainState(AMainState node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAMainState(AMainState node)
+    {
+        InAMainState(node);
         if(node.GetMainDef() != null)
         {
             node.GetMainDef().Apply(this);
@@ -595,7 +619,7 @@ public class DepthFirstAdapter : AnalysisAdapter
         {
             node.GetCloseBracket().Apply(this);
         }
-        OutAProgram(node);
+        OutAMainState(node);
     }
     public virtual void InAMultipleConstantsConstants(AMultipleConstantsConstants node)
     {
@@ -1963,6 +1987,33 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
     public override void CaseAProgram(AProgram node)
     {
         InAProgram(node);
+        if(node.GetMainState() != null)
+        {
+            node.GetMainState().Apply(this);
+        }
+        if(node.GetFunctions() != null)
+        {
+            node.GetFunctions().Apply(this);
+        }
+        if(node.GetConstants() != null)
+        {
+            node.GetConstants().Apply(this);
+        }
+        OutAProgram(node);
+    }
+    public virtual void InAMainState(AMainState node)
+    {
+        DefaultIn(node);
+    }
+
+    public virtual void OutAMainState(AMainState node)
+    {
+        DefaultOut(node);
+    }
+
+    public override void CaseAMainState(AMainState node)
+    {
+        InAMainState(node);
         if(node.GetCloseBracket() != null)
         {
             node.GetCloseBracket().Apply(this);
@@ -1979,15 +2030,7 @@ public class ReversedDepthFirstAdapter : AnalysisAdapter
         {
             node.GetMainDef().Apply(this);
         }
-        if(node.GetFunctions() != null)
-        {
-            node.GetFunctions().Apply(this);
-        }
-        if(node.GetConstants() != null)
-        {
-            node.GetConstants().Apply(this);
-        }
-        OutAProgram(node);
+        OutAMainState(node);
     }
     public virtual void InAMultipleConstantsConstants(AMultipleConstantsConstants node)
     {

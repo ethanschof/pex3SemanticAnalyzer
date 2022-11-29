@@ -70,7 +70,9 @@ Ignored Tokens
 
 // PEX 2 - Parser Portion
 Productions
-	program = constants functions main_def open_bracket statements close_bracket;
+	program = constants functions main_state;
+
+	main_state = main_def open_bracket statements close_bracket;
 
 	constants = {multiple_constants} constant constants | {no_constants};
 
