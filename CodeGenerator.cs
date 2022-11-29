@@ -13,7 +13,8 @@ namespace CS426.analysis
     {
         StreamWriter _output;
 
-        // SECTIONS DONE 1 2 4 5 6 7 8 9 10 11 12
+        // SECTIONS DONE 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+        // Sections TODO 16 17 18
 
 
         public CodeGenerator(string outputFilename)
@@ -158,6 +159,35 @@ namespace CS426.analysis
             }
         }
 
+
+        public override void OutANotequivalentExpression3(ANotequivalentExpression3 node)
+        {
+            WriteLine("\tldc.i4 0");
+            WriteLine("\tceq");
+        }
+
+        public override void OutABitandExpression2(ABitandExpression2 node)
+        {
+            WriteLine("and");
+        }
+
+        public override void OutABitorExpression(ABitorExpression node)
+        {
+            WriteLine("or");
+        }
+
+        public override void InAFunction(AFunction node)
+        {
+            WriteLine(".method static void <function>() cil managed");
+            WriteLine("{");
+            WriteLine("\t.maxstack 128");
+        }
+
+        public override void OutAFunction(AFunction node)
+        {
+            WriteLine("\tret");
+            WriteLine("}");
+        }
 
 
 
