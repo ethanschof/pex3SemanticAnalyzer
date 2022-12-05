@@ -5,7 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.IO;
-
+using System.Runtime.CompilerServices;
 
 namespace CS426.analysis
 {
@@ -15,6 +15,7 @@ namespace CS426.analysis
 
         // SECTIONS DONE 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
         // Sections TODO 16 17 18
+        string branchLabel = "mylabel";
 
 
         public CodeGenerator(string outputFilename)
@@ -160,7 +161,7 @@ namespace CS426.analysis
         }
 
 
-        public override void OutANotequivalentExpression3(ANotequivalentExpression3 node)
+        public override void OutABitnotExpressionMath3(ABitnotExpressionMath3 node)
         {
             WriteLine("\tldc.i4 0");
             WriteLine("\tceq");
@@ -189,6 +190,311 @@ namespace CS426.analysis
             WriteLine("}");
         }
 
+
+        public override void CaseAJustifIfStatement(AJustifIfStatement node)
+        {
+            string label1 = branchLabel;
+            branchLabel += 1;
+
+            string label2 = branchLabel;
+            branchLabel += 1;
+
+            string label3 = branchLabel;
+            branchLabel += 1;
+
+            InAJustifIfStatement(node);
+            if (node.GetIf() != null)
+            {
+                node.GetIf().Apply(this);
+            }
+            if (node.GetOpenParenthesis() != null)
+            {
+                node.GetOpenParenthesis().Apply(this);
+            }
+            if (node.GetExpression() != null)
+            {
+                node.GetExpression().Apply(this);
+            }
+            if (node.GetCloseParenthesis() != null)
+            {
+                node.GetCloseParenthesis().Apply(this);
+            }
+
+            WriteLine("brtrue " + label1);
+            WriteLine("br " + label2);
+            WriteLine(label1 + ":");
+
+            if (node.GetOpenBracket() != null)
+            {
+                node.GetOpenBracket().Apply(this);
+            }
+            if (node.GetStatements() != null)
+            {
+                node.GetStatements().Apply(this);
+            }
+            if (node.GetCloseBracket() != null)
+            {
+                node.GetCloseBracket().Apply(this);
+            }
+
+
+            WriteLine("br " + label3);
+            WriteLine(label2 + ":");
+
+
+            WriteLine(label3 + ":");
+
+            OutAJustifIfStatement(node);
+        }
+
+        public override void CaseAIfelseIfStatement(AIfelseIfStatement node)
+        {
+            string label1 = branchLabel;
+            branchLabel += 1;
+
+            string label2 = branchLabel;
+            branchLabel += 1;
+
+            string label3 = branchLabel;
+            branchLabel += 1;
+
+
+            InAIfelseIfStatement(node);
+            if (node.GetIf() != null)
+            {
+                node.GetIf().Apply(this);
+            }
+            if (node.GetOpenParenthesis() != null)
+            {
+                node.GetOpenParenthesis().Apply(this);
+            }
+            if (node.GetExpression() != null)
+            {
+                node.GetExpression().Apply(this);
+            }
+            if (node.GetCloseParenthesis() != null)
+            {
+                node.GetCloseParenthesis().Apply(this);
+            }
+
+            WriteLine("brtrue " + label1);
+            WriteLine("br " + label2);
+            WriteLine(label1 + ":");
+
+            if (node.GetIfOpenBracket() != null)
+            {
+                node.GetIfOpenBracket().Apply(this);
+            }
+            if (node.GetIfStatements() != null)
+            {
+                node.GetIfStatements().Apply(this);
+            }
+            if (node.GetIfCloseBracket() != null)
+            {
+                node.GetIfCloseBracket().Apply(this);
+            }
+
+            WriteLine("br " + label3);
+            WriteLine(label2 + ":");
+
+            if (node.GetElse() != null)
+            {
+                node.GetElse().Apply(this);
+            }
+            if (node.GetElseOpenBracket() != null)
+            {
+                node.GetElseOpenBracket().Apply(this);
+            }
+            if (node.GetElseStatements() != null)
+            {
+                node.GetElseStatements().Apply(this);
+            }
+            if (node.GetElseCloseBracket() != null)
+            {
+                node.GetElseCloseBracket().Apply(this);
+            }
+
+            WriteLine(label3 + ":");
+
+            OutAIfelseIfStatement(node);
+        }
+
+        public override void OutAEquivalentExpression3(AEquivalentExpression3 node)
+        {
+            string label1 = branchLabel;
+            branchLabel += 1;
+
+            string label2 = branchLabel;
+            branchLabel += 1;
+
+
+            Write("beq ");
+            WriteLine(label1);
+
+            WriteLine("\tldc.i4 0");
+            WriteLine("\tbr " + label2);
+
+            WriteLine(label1 + ":");
+            WriteLine("\tldc.i4 1");
+
+            WriteLine(label2 + ":");
+
+        }
+
+        public override void OutANotequivalentExpression3(ANotequivalentExpression3 node)
+        {
+            string label1 = branchLabel;
+            branchLabel += 1;
+
+            string label2 = branchLabel;
+            branchLabel += 1;
+
+
+            Write("bne.un ");
+            WriteLine(label1);
+
+            WriteLine("\tldc.i4 0");
+            WriteLine("\tbr " + label2);
+
+            WriteLine(label1 + ":");
+            WriteLine("\tldc.i4 1");
+
+            WriteLine(label2 + ":");
+        }
+
+        public override void OutAGreateqExpression4(AGreateqExpression4 node)
+        {
+            string label1 = branchLabel;
+            branchLabel += 1;
+
+            string label2 = branchLabel;
+            branchLabel += 1;
+
+
+            Write("bge ");
+            WriteLine(label1);
+
+            WriteLine("\tldc.i4 0");
+            WriteLine("\tbr " + label2);
+
+            WriteLine(label1 + ":");
+            WriteLine("\tldc.i4 1");
+
+            WriteLine(label2 + ":");
+        }
+
+        public override void OutALesseqExpression4(ALesseqExpression4 node)
+        {
+            string label1 = branchLabel;
+            branchLabel += 1;
+
+            string label2 = branchLabel;
+            branchLabel += 1;
+
+
+            Write("ble ");
+            WriteLine(label1);
+
+            WriteLine("\tldc.i4 0");
+            WriteLine("\tbr " + label2);
+
+            WriteLine(label1 + ":");
+            WriteLine("\tldc.i4 1");
+
+            WriteLine(label2 + ":");
+        }
+
+        public override void OutALessthanExpression4(ALessthanExpression4 node)
+        {
+            string label1 = branchLabel;
+            branchLabel += 1;
+
+            string label2 = branchLabel;
+            branchLabel += 1;
+
+
+            Write("blt ");
+            WriteLine(label1);
+
+            WriteLine("\tldc.i4 0");
+            WriteLine("\tbr " + label2);
+
+            WriteLine(label1 + ":");
+            WriteLine("\tldc.i4 1");
+
+            WriteLine(label2 + ":");
+        }
+
+        public override void OutAGreatthanExpression4(AGreatthanExpression4 node)
+        {
+            string label1 = branchLabel;
+            branchLabel += 1;
+
+            string label2 = branchLabel;
+            branchLabel += 1;
+
+
+            Write("bgt ");
+            WriteLine(label1);
+
+            WriteLine("\tldc.i4 0");
+            WriteLine("\tbr " + label2);
+
+            WriteLine(label1 + ":");
+            WriteLine("\tldc.i4 1");
+
+            WriteLine(label2 + ":");
+        }
+
+        public override void CaseAWhileWhileStatement(AWhileWhileStatement node)
+        {
+            string label1 = branchLabel;
+            branchLabel += 1;
+
+            string label2 = branchLabel;
+            branchLabel += 1;
+
+            InAWhileWhileStatement(node);
+            if (node.GetWhile() != null)
+            {
+                node.GetWhile().Apply(this);
+            }
+
+            WriteLine(label1 + ":");
+
+            if (node.GetOpenParenthesis() != null)
+            {
+                node.GetOpenParenthesis().Apply(this);
+            }
+            if (node.GetExpression() != null)
+            {
+                node.GetExpression().Apply(this);
+            }
+            if (node.GetCloseParenthesis() != null)
+            {
+                node.GetCloseParenthesis().Apply(this);
+            }
+
+            WriteLine("brzero " + label2);
+
+            if (node.GetOpenBracket() != null)
+            {
+                node.GetOpenBracket().Apply(this);
+            }
+            if (node.GetStatements() != null)
+            {
+                node.GetStatements().Apply(this);
+            }
+            if (node.GetCloseBracket() != null)
+            {
+                node.GetCloseBracket().Apply(this);
+            }
+
+            WriteLine("br " + label1);
+            WriteLine(label2 + ":");
+
+            OutAWhileWhileStatement(node);
+        }
 
 
     }
